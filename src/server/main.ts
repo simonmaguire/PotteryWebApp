@@ -1,0 +1,37 @@
+import { Express, NextFunction, Request, Response } from "express";
+import * as express from "express";
+import * as path from "path";
+
+const connectDB = require("./config/db");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const app: Express = express();
+
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json());
+app.use(bodyParser.json());
+
+//Takes care of cross-origin
+app.use(function (
+  inRequest: Request,
+  inResponse: Response,
+  inNext: NextFunction
+) {
+  inResponse.header("Access-Control-Allow-Origin", "*");
+  inResponse.header("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS");
+  inResponse.header(
+    "Access-Control-Allow-Headers",
+    "Origin,X-Requested-With,Content-Type,Accept"
+  );
+  inNext();
+});
+
+// Connect Database
+connectDB();
+
+//routes
+const potteryRoutes = require("./routes/PotteryRoutes");
+app.use(potteryRoutes);
+
+const port = process.env.PORT || 3001;
+app.listen(port, () => console.log(`Server running on port ${port}`));
