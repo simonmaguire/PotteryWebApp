@@ -3,8 +3,10 @@ import { Form, Card } from "react-bootstrap";
 function GeneralSection() {
   return (
     <Card className="form-section">
-      <Card.Header className="section-header">General</Card.Header>
-      <Card.Body>
+      <Card.Header as="h2" className="section-header">
+        General
+      </Card.Header>
+      <Card.Body className="form-content">
         <Form.Group>
           <Form.Label>Stage</Form.Label>
           <Form.Control type="text" />
