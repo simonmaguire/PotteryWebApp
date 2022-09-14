@@ -1,31 +1,19 @@
 import React from "react";
 import { Form, Col, Row, Card } from "react-bootstrap";
+import GeneralSection from "./GeneralSection";
+import ThrowingSection from "./ThrowingSection";
+import TrimmingSection from "./TrimmingSection";
+import GlazingSection from "./GlazingSection";
+import ResultSection from "./ResultSection";
 
 const PotForm: React.FC = () => {
   return (
     <div>
-      <Card className="form-section">
-        <Card.Header className="section-header">General</Card.Header>
-        <Card.Body>
-            
-        </Card.Body>
-      </Card>
-      <Card className="form-section">
-        <Card.Header className="section-header">Throwing</Card.Header>
-        <Card.Body></Card.Body>
-      </Card>
-      <Card className="form-section">
-        <Card.Header className="section-header">Trimming</Card.Header>
-        <Card.Body></Card.Body>
-      </Card>
-      <Card className="form-section">
-        <Card.Header className="section-header">Glazing</Card.Header>
-        <Card.Body></Card.Body>
-      </Card>
-      <Card className="form-section">
-        <Card.Header className="section-header">Results</Card.Header>
-        <Card.Body></Card.Body>
-      </Card>
+      <GeneralSection></GeneralSection>
+      <ThrowingSection></ThrowingSection>
+      <TrimmingSection></TrimmingSection>
+      <GlazingSection></GlazingSection>
+      <ResultSection></ResultSection>
     </div>
   );
 };
