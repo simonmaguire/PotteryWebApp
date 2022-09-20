@@ -1,5 +1,5 @@
 import react from "react";
-import { IPot } from "../types";
+// import { IPot } from "../../types";
 
 type PotRowProps = {
   pot: IPot;

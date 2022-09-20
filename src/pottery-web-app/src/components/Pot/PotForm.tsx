@@ -6,11 +6,11 @@ import GlazingSection from "./GlazingSection";
 import ResultSection from "./ResultSection";
 import { Container, Button } from "react-bootstrap";
 import { useState } from "react";
-import { IPotInfo } from "../types";
+// import { IPotInfo } from "../../types";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 
-const initialState = () => {
-  const defaultPot: IPotInfo = {
+const PotForm: React.FC = () => {
+  let initialState: IPotInfo = {
     id: "",
     stage: "",
     clay: "",
@@ -28,12 +28,8 @@ const initialState = () => {
     result_width: "",
     result_notes: "",
   };
-  return defaultPot;
-};
+  const [potInfo, setPotInfo] = useState<IPotInfo>(initialState);
 
-const PotForm: React.FC = () => {
-  let pot = initialState();
-  const [potInfo, setPotInfo] = useState<IPotInfo>(pot);
   const methods = useForm<IPotInfo>();
 
   //TODO? Probably create different funcs for changing different input types. 2 isnt too bad but it'll grow

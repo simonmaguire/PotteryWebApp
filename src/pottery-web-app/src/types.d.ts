@@ -18,7 +18,7 @@ type ApiDataType = {
   pot?: IPot;
 };
 
-export interface IPotInfo {
+interface IPotInfo {
   id?: string;
   stage?: string;
   clay?: string;
