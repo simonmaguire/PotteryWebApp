@@ -13,7 +13,7 @@ const Main: React.FC = () => {
   }, []);
 
   const fetchPots = (): void => {
-    getPots().then(({ data: { pots } }: IPot[] | any) => {
+    getPots().then(({ data: { pots } }: IPotInfo[] | any) => {
       console.log(pots);
       setPots(pots);
     });

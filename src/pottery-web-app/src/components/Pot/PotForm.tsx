@@ -8,10 +8,11 @@ import { Container, Button } from "react-bootstrap";
 import { useState } from "react";
 // import { IPotInfo } from "../../types";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { addPot } from "../../API";
+import { useNavigate } from "react-router-dom";
 
 const PotForm: React.FC = () => {
   let initialState: IPotInfo = {
-    id: "",
     stage: "",
     clay: "",
     name: "",
@@ -31,6 +32,7 @@ const PotForm: React.FC = () => {
   const [potInfo, setPotInfo] = useState<IPotInfo>(initialState);
 
   const methods = useForm<IPotInfo>();
+  const navigate = useNavigate();
 
   //TODO? Probably create different funcs for changing different input types. 2 isnt too bad but it'll grow
   const updatePotInfo = (
@@ -38,6 +40,12 @@ const PotForm: React.FC = () => {
   ) => {
     console.log(ev.target.name, " - ", ev.target.value);
     setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
+  };
+
+  const handleAddPot = (): void => {
+    addPot(potInfo).then(({ data: { pot } }: IPotInfo | any) => {
+      console.log(pot);
+    });
   };
 
   return (
@@ -66,11 +74,10 @@ const PotForm: React.FC = () => {
               potInfo={potInfo}
               handleChange={updatePotInfo}
             ></ResultSection>
-            <Button variant="outline-primary">Cancel</Button>
-            <Button
-              variant="outline-primary"
-              onClick={() => console.log(potInfo)}
-            >
+            <Button variant="outline-primary" onClick={() => navigate("/")}>
+              Cancel
+            </Button>
+            <Button variant="outline-primary" onClick={handleAddPot}>
               Create
             </Button>
           </form>

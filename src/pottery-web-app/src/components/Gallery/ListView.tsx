@@ -15,21 +15,15 @@ const ListView: React.FC<ListViewProps> = (pots) => {
       <Table striped bordered id="pottery-table">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Last Edit</th>
-            <th>Created On</th>
+            <th>Name</th>
+            <th>Clay</th>
             <th>Category</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2</td>
-            <td>9-1-2022</td>
-            <td>8-26-2022</td>
-            <td>Mug</td>
-          </tr>
-          {pots.pots.map((pot) => (
-            <PotRow pot={pot}></PotRow>
+          {pots.pots.map((pot, y) => (
+            <PotRow key={y} pot={pot}></PotRow>
           ))}
         </tbody>
       </Table>
