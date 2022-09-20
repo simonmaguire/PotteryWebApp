@@ -39,5 +39,8 @@ export interface IPotInfo {
 
 interface SectionProps {
   potInfo: IPotInfo;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (
+    event: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+  ) => void;
+  // handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

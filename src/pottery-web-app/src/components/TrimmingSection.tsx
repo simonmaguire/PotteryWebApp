@@ -1,7 +1,13 @@
 import { Form, Container, Card } from "react-bootstrap";
 import { SectionProps } from "../types";
+import { useFormContext, Controller } from "react-hook-form";
 
 function TrimmingSection(props: SectionProps) {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <Card className="form-section">
       <Card.Header as="h2" className="section-header">
@@ -15,24 +21,40 @@ function TrimmingSection(props: SectionProps) {
           </Form.Group>
           <Form.Group>
             <Form.Label>Greenware Decorations</Form.Label>
-            <Form.Control
-              type="text"
-              value={props.potInfo.green_decorations}
+            <Controller
               name="green_decorations"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                props.handleChange(e)
-              }
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  type="text"
+                  value={props.potInfo.green_decorations}
+                  name="green_decorations"
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+                  ) => props.handleChange(e)}
+                />
+              )}
             />
           </Form.Group>
           <Form.Group>
             <Form.Label>Trimming Notes</Form.Label>
-            <Form.Control
-              as="textarea"
-              value={props.potInfo.trim_notes}
+            <Controller
               name="trim_notes"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                props.handleChange(e)
-              }
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  as="textarea"
+                  value={props.potInfo.trim_notes}
+                  name="trim_notes"
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+                  ) => props.handleChange(e)}
+                />
+              )}
             />
           </Form.Group>
           {/* <Form.Group>
