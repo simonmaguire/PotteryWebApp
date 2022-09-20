@@ -1,5 +1,7 @@
 interface IPot {
   _id: string;
+  name;
+  string;
   clay: string;
   category: string;
   status: boolean;
@@ -19,7 +21,7 @@ type ApiDataType = {
 };
 
 interface IPotInfo {
-  id?: string;
+  _id?: string;
   stage?: string;
   clay?: string;
   name?: string;

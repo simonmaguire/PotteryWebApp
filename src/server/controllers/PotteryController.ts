@@ -10,20 +10,49 @@ const getAllPots = async (req: Request, res: Response): Promise<void> => {
     throw error;
   }
 };
+
 const createPot = async (req: Request, res: Response): Promise<void> => {
   try {
-    const body = req.body as Pick<IPot, "name" | "clay" | "category">;
+    const body = req.body as Pick<
+      IPot,
+      | "stage"
+      | "clay"
+      | "name"
+      | "category"
+      | "clay_weight"
+      | "throw_height"
+      | "throw_width"
+      | "throw_notes"
+      | "green_decorations"
+      | "trim_notes"
+      | "glazes"
+      | "glaze_notes"
+      | "result_height"
+      | "result_width"
+      | "result_notes"
+    >;
 
     const pot: IPot = new PotterySchema({
-      name: body.name,
+      stage: body.stage,
       clay: body.clay,
+      name: body.name,
       category: body.category,
+      clay_weight: body.clay_weight,
+      throw_height: body.throw_height,
+      throw_width: body.throw_width,
+      throw_notes: body.throw_notes,
+      green_decorations: body.green_decorations,
+      trim_notes: body.trim_notes,
+      glazes: body.glazes,
+      glaze_notes: body.glaze_notes,
+      result_height: body.result_height,
+      result_width: body.result_width,
+      result_notes: body.result_notes,
     });
 
     const newPot: IPot = await pot.save();
-    const allPots: IPot[] = await PotterySchema.find();
 
-    res.status(201).json({ message: "Pot added", pot: newPot, pots: allPots });
+    res.status(201).json({ message: "Pot added", pot: newPot });
   } catch (error) {
     console.log("No way");
     throw error;
