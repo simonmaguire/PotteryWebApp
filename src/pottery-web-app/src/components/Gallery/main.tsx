@@ -2,8 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ListView from "./ListView";
 import Options from "./options";
-import { getPots } from "../API";
-import { IPot } from "../types";
+import { getPots } from "../../API";
+// import { IPot } from "../../types";
 
 const Main: React.FC = () => {
   const [pots, setPots] = useState<IPot[]>([]);

@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Card } from "react-bootstrap";
-import { IPotInfo, SectionProps } from "../types";
+// import { IPotInfo, SectionProps } from "../../types";
 import { useFormContext, Controller } from "react-hook-form";
 
 function GeneralSection(props: SectionProps) {

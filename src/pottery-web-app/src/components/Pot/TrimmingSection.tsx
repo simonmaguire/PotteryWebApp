@@ -1,5 +1,5 @@
 import { Form, Container, Card } from "react-bootstrap";
-import { SectionProps } from "../types";
+// import { SectionProps } from "../../types";
 import { useFormContext, Controller } from "react-hook-form";
 
 function TrimmingSection(props: SectionProps) {
