@@ -1,7 +1,13 @@
 import { Form, Container, Card } from "react-bootstrap";
 import { SectionProps } from "../types";
+import { useFormContext, Controller } from "react-hook-form";
 
 function GlazingSection(props: SectionProps) {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <Card className="form-section">
       <Card.Header as="h2" className="section-header">
@@ -11,24 +17,40 @@ function GlazingSection(props: SectionProps) {
         <Container>
           <Form.Group>
             <Form.Label>Glazes</Form.Label>
-            <Form.Control
-              type="text"
-              value={props.potInfo.glazes}
+            <Controller
               name="glazes"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                props.handleChange(e)
-              }
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  type="text"
+                  value={props.potInfo.glazes}
+                  name="glazes"
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+                  ) => props.handleChange(e)}
+                />
+              )}
             />
           </Form.Group>
           <Form.Group>
             <Form.Label>Glaze Notes</Form.Label>
-            <Form.Control
-              as="textarea"
-              value={props.potInfo.glaze_notes}
+            <Controller
               name="glaze_notes"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                props.handleChange(e)
-              }
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  as="textarea"
+                  value={props.potInfo.glaze_notes}
+                  name="glaze_notes"
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+                  ) => props.handleChange(e)}
+                />
+              )}
             />
           </Form.Group>
           {/* <Form.Group>

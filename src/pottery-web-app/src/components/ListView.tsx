@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import PotRow from "./PotRow";
+import { IPot } from "../types";
 
 type ListViewProps = {
   pots: IPot[];
