@@ -1,8 +1,6 @@
 import { IPot } from "./../types/pot";
 import { model, Schema } from "mongoose";
 
-const mongoose = require("mongoose");
-
 const PotterySchema: Schema = new Schema(
   {
     name: {
@@ -11,16 +9,62 @@ const PotterySchema: Schema = new Schema(
     },
     clay: {
       type: String,
-      required: true,
+      required: false,
     },
     category: {
       type: String,
-      required: true,
+      required: false,
+    },
+    stage: {
+      type: String,
+      required: false,
+    },
+    clay_weight: {
+      type: String,
+      required: false,
+    },
+    throw_height: {
+      type: String,
+      required: false,
+    },
+    throw_width: {
+      type: String,
+      required: false,
+    },
+    throw_notes: {
+      type: String,
+      required: false,
+    },
+    green_decorations: {
+      type: String,
+      required: false,
+    },
+    trim_notes: {
+      type: String,
+      required: false,
+    },
+    glazes: {
+      type: String,
+      required: false,
+    },
+    glaze_notes: {
+      type: String,
+      required: false,
+    },
+    result_height: {
+      type: String,
+      required: false,
+    },
+    result_width: {
+      type: String,
+      required: false,
+    },
+    result_notes: {
+      type: String,
+      required: false,
     },
   },
   { collection: "Pots" }
 );
 
 export default model<IPot>("pottery", PotterySchema);
-// const Pottery = mongoose.model("pottery", PotterySchema);
-// module.exports = Pottery;

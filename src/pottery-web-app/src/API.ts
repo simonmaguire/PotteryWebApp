@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+// import { ApiDataType, IPot } from "./types";
 
 const baseUrl: string = "http://localhost:3001";
 
@@ -12,13 +13,25 @@ export const getPots = async (): Promise<AxiosResponse<ApiDataType>> => {
 };
 
 export const addPot = async (
-  formData: IPot
+  formData: IPotInfo
 ): Promise<AxiosResponse<ApiDataType>> => {
   try {
-    const pot: Omit<IPot, "_id"> = {
+    const pot: Omit<IPotInfo, "_id"> = {
+      stage: formData.stage,
       clay: formData.clay,
+      name: formData.name,
       category: formData.category,
-      status: false,
+      clay_weight: formData.clay_weight,
+      throw_height: formData.throw_height,
+      throw_width: formData.throw_width,
+      throw_notes: formData.throw_notes,
+      green_decorations: formData.green_decorations,
+      trim_notes: formData.trim_notes,
+      glazes: formData.glazes,
+      glaze_notes: formData.glaze_notes,
+      result_height: formData.result_height,
+      result_width: formData.result_width,
+      result_notes: formData.result_notes,
     };
     const savePot: AxiosResponse<ApiDataType> = await axios.post(
       baseUrl + "/create-pot",

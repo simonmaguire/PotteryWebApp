@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
-import Main from "./components/main";
-import AddPot from "./components/addPot";
+import Main from "./components/Gallery/main";
+import AddPot from "./components/Pot/AddPot";
 import Banner from "./components/banner";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
