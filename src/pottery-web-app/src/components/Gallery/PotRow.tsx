@@ -1,4 +1,5 @@
 import react from "react";
+// import { IPot } from "../../types";
 
 type PotRowProps = {
   pot: IPot;
@@ -7,9 +8,8 @@ type PotRowProps = {
 const PotRow: React.FC<PotRowProps> = (pot) => {
   return (
     <tr>
-      <td>{pot.pot._id}</td>
-      <td>{pot.pot.lastUpdate}</td>
-      <td>{pot.pot.createdOn}</td>
+      <td>{pot.pot.name}</td>
+      <td>{pot.pot.clay}</td>
       <td>{pot.pot.category}</td>
     </tr>
   );

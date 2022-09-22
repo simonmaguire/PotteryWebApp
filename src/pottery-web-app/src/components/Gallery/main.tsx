@@ -2,7 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ListView from "./ListView";
 import Options from "./options";
-import { getPots } from "../API";
+import { getPots } from "../../API";
+// import { IPot } from "../../types";
 
 const Main: React.FC = () => {
   const [pots, setPots] = useState<IPot[]>([]);
@@ -12,7 +13,7 @@ const Main: React.FC = () => {
   }, []);
 
   const fetchPots = (): void => {
-    getPots().then(({ data: { pots } }: IPot[] | any) => {
+    getPots().then(({ data: { pots } }: IPotInfo[] | any) => {
       console.log(pots);
       setPots(pots);
     });

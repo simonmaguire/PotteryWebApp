@@ -48,6 +48,25 @@
   color: white;
 }
 
+#form-section {
+  display: flex;
+}
+
+.form-content {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px;
+  flex-wrap: wrap;
+}
+
+.form-content {
+  padding-bottom: 30px;
+}
+
+.form-label {
+  padding-right: 30px;
+}
+
 .pottery-view {
   width: 100%;
 }
