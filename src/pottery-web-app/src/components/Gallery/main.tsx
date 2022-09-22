@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ListView from "./ListView";
 import Options from "./options";
-import { getPots } from "../../API";
+import { getPots, deletePot } from "../../API";
 // import { IPot } from "../../types";
 
 const Main: React.FC = () => {
@@ -19,10 +19,16 @@ const Main: React.FC = () => {
     });
   };
 
+  const handleDeletePot = (_id: string): void => {
+    deletePot(_id).then(({ data: { pots } }: IPotInfo[] | any) => {
+      setPots(pots);
+    });
+  };
+
   return (
     <div id="Main">
       <Options></Options>
-      <ListView pots={pots}></ListView>
+      <ListView pots={pots} handleDeletePot={handleDeletePot}></ListView>
     </div>
   );
 };

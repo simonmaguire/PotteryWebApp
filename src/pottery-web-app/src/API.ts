@@ -12,6 +12,19 @@ export const getPots = async (): Promise<AxiosResponse<ApiDataType>> => {
   }
 };
 
+export const getPot = async (
+  _id: string
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const pot: AxiosResponse<ApiDataType> = await axios.get(
+      `${baseUrl}/pot/${_id}`
+    );
+    return pot;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const addPot = async (
   formData: IPotInfo
 ): Promise<AxiosResponse<ApiDataType>> => {
@@ -44,15 +57,12 @@ export const addPot = async (
 };
 
 export const updatePot = async (
-  pot: IPot
+  pot: IPotInfo
 ): Promise<AxiosResponse<ApiDataType>> => {
   try {
-    const potUpdate: Pick<IPot, "status"> = {
-      status: true,
-    };
     const updatedPot: AxiosResponse<ApiDataType> = await axios.put(
       `${baseUrl}/update-pot/${pot._id}`,
-      potUpdate
+      pot
     );
     return updatedPot;
   } catch (error) {
