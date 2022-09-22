@@ -21,7 +21,7 @@ type ApiDataType = {
 };
 
 interface IPotInfo {
-  _id?: string;
+  _id: string;
   stage?: string;
   clay?: string;
   name?: string;
@@ -44,5 +44,4 @@ interface SectionProps {
   handleChange: (
     event: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => void;
-  // handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

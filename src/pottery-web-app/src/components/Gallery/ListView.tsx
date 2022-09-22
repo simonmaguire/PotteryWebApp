@@ -6,10 +6,11 @@ import PotRow from "./PotRow";
 
 type ListViewProps = {
   pots: IPot[];
+  handleDeletePot: (id: string) => void;
 };
 
-const ListView: React.FC<ListViewProps> = (pots) => {
-  console.log("list pots: \n", pots);
+const ListView: React.FC<ListViewProps> = (props) => {
+  console.log("list pots: \n", props.pots);
   return (
     <div className="pottery-view">
       <Table striped bordered id="pottery-table">
@@ -22,8 +23,12 @@ const ListView: React.FC<ListViewProps> = (pots) => {
           </tr>
         </thead>
         <tbody>
-          {pots.pots.map((pot, y) => (
-            <PotRow key={y} pot={pot}></PotRow>
+          {props.pots.map((pot, y) => (
+            <PotRow
+              key={y}
+              pot={pot}
+              handleDelete={props.handleDeletePot}
+            ></PotRow>
           ))}
         </tbody>
       </Table>
