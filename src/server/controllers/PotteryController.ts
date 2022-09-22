@@ -59,6 +59,15 @@ const createPot = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+const getPot = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const pot: IPot | null = await PotterySchema.findById(req.params.id);
+    res.status(200).json({ pot });
+  } catch (error) {
+    throw error;
+  }
+};
+
 const updatePot = async (req: Request, res: Response): Promise<void> => {
   try {
     const {
@@ -69,11 +78,9 @@ const updatePot = async (req: Request, res: Response): Promise<void> => {
       { _id: id },
       body
     );
-    const allPots: IPot[] = await PotterySchema.find();
     res.status(200).json({
       message: "Pot updated",
       pot: updatePot,
-      pots: allPots,
     });
   } catch (error) {
     throw error;
@@ -96,4 +103,4 @@ const deletePot = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAllPots, createPot, updatePot, deletePot };
+export { getAllPots, createPot, getPot, updatePot, deletePot };

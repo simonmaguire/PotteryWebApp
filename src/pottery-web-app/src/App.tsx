@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "./logo.svg";
 import Main from "./components/Gallery/main";
-import AddPot from "./components/Pot/AddPot";
+import NewPotForm from "./components/Pot/NewPotForm";
+import PotForm from "./components/Pot/PotForm";
 import Banner from "./components/banner";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -14,7 +15,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/new" element={<AddPot />} />
+          <Route path="/pot/new" element={<NewPotForm />} />
+          <Route path="/pot/:id" element={<PotForm />} />
         </Routes>
       </Router>
     </div>

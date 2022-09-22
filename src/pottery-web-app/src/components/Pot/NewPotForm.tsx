@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GeneralSection from "./GeneralSection";
 import ThrowingSection from "./ThrowingSection";
 import TrimmingSection from "./TrimmingSection";
@@ -8,11 +8,11 @@ import { Container, Button } from "react-bootstrap";
 import { useState } from "react";
 // import { IPotInfo } from "../../types";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { updatePot, getPot, deletePot } from "../../API";
+import { addPot } from "../../API";
 import { useNavigate } from "react-router-dom";
 
-const PotForm: React.FC = () => {
-  let initialState: IPotInfo = {
+const NewPotForm: React.FC = () => {
+  const initialState: IPotInfo = {
     _id: "",
     stage: "",
     clay: "",
@@ -29,18 +29,9 @@ const PotForm: React.FC = () => {
     result_height: "",
     result_width: "",
     result_notes: "",
-  }; //I feel like this shouldnt be necessary
-
-  const loadPot = (): void => {
-    getPot(
-      window.location.href.substring(window.location.href.lastIndexOf("/") + 1)
-    ).then(({ data: { pot } }: IPotInfo | any) => {
-      setPotInfo(pot);
-    });
   };
 
   const [potInfo, setPotInfo] = useState<IPotInfo>(initialState);
-  useEffect(loadPot, []);
 
   const methods = useForm<IPotInfo>();
   const navigate = useNavigate();
@@ -53,15 +44,9 @@ const PotForm: React.FC = () => {
     setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
   };
 
-  const handleSavePot = (): void => {
-    updatePot(potInfo).then(({ data: { pot } }: IPotInfo | any) => {
-      console.log(pot);
-    });
-  };
-
-  const handleDeletePot = (): void => {
-    deletePot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
-      navigate("/");
+  const handleAddPot = (): void => {
+    addPot(potInfo).then(({ data: { pot } }: IPotInfo | any) => {
+      navigate(`/pot/${pot._id}`);
     });
   };
 
@@ -94,11 +79,8 @@ const PotForm: React.FC = () => {
             <Button variant="outline-primary" onClick={() => navigate("/")}>
               Cancel
             </Button>
-            <Button variant="outline-primary" onClick={handleSavePot}>
-              Save
-            </Button>
-            <Button variant="outline-primary" onClick={handleDeletePot}>
-              Delete Pot
+            <Button variant="outline-primary" onClick={handleAddPot}>
+              Create
             </Button>
           </form>
         </FormProvider>
@@ -107,4 +89,4 @@ const PotForm: React.FC = () => {
   );
 };
 
-export default PotForm;
+export default NewPotForm;
