@@ -1,8 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import PotRow from "./PotRow";
-// import { IPot } from "../../types";
 
 type ListViewProps = {
   pots: IPot[];
@@ -10,13 +8,13 @@ type ListViewProps = {
 };
 
 const ListView: React.FC<ListViewProps> = (props) => {
-  console.log("list pots: \n", props.pots);
   return (
     <div className="pottery-view">
       <Table striped bordered id="pottery-table">
         <thead>
           <tr>
             <th>Name</th>
+            <th>Stage</th>
             <th>Clay</th>
             <th>Category</th>
             <th>Actions</th>
