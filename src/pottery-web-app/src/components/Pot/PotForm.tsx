@@ -1,62 +1,33 @@
-import React, { useEffect } from "react";
-import GeneralSection from "./GeneralSection";
-import ThrowingSection from "./ThrowingSection";
-import TrimmingSection from "./TrimmingSection";
-import GlazingSection from "./GlazingSection";
-import ResultSection from "./ResultSection";
+import React, { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
-import { useState } from "react";
-// import { IPotInfo } from "../../types";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { updatePot, getPot, deletePot } from "../../API";
 import { useNavigate } from "react-router-dom";
+import { BLANK_POT } from "../../Constants";
+import CommonPotForm from "./CommonPotForm";
+import { addPot } from "../../API";
 
 const PotForm: React.FC = () => {
-  let initialState: IPotInfo = {
-    _id: "",
-    stage: "",
-    clay: "",
-    name: "",
-    category: "",
-    clay_weight: "",
-    throw_height: "",
-    throw_width: "",
-    throw_notes: "",
-    green_decorations: "",
-    trim_notes: "",
-    glazes: "",
-    glaze_notes: "",
-    result_height: "",
-    result_width: "",
-    result_notes: "",
-  }; //I feel like this shouldnt be necessary
-
-  const loadPot = (): void => {
-    getPot(
-      window.location.href.substring(window.location.href.lastIndexOf("/") + 1)
-    ).then(({ data: { pot } }: IPotInfo | any) => {
-      setPotInfo(pot);
-    });
-  };
-
-  const [potInfo, setPotInfo] = useState<IPotInfo>(initialState);
-  useEffect(loadPot, []);
-
-  const methods = useForm<IPotInfo>();
   const navigate = useNavigate();
 
-  //TODO? Probably create different funcs for changing different input types. 2 isnt too bad but it'll grow
-  const updatePotInfo = (
-    ev: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-  ) => {
-    console.log(ev.target.name, " - ", ev.target.value);
-    setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
-  };
+  const [potInfo, setPotInfo] = useState<IPotInfo>({
+    ...BLANK_POT,
+    _id: window.location.href.substring(
+      window.location.href.lastIndexOf("/") + 1
+    ),
+  });
 
+  const loadPot = (): void => {
+    if (potInfo._id !== "new" && potInfo._id !== "old") {
+      getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
+        setPotInfo(pot);
+      });
+    }
+  };
+  useEffect(loadPot, []);
+
+  //Button Methods
   const handleSavePot = (): void => {
-    updatePot(potInfo).then(({ data: { pot } }: IPotInfo | any) => {
-      console.log(pot);
-    });
+    updatePot(potInfo).then(({ data: { pot } }: IPotInfo | any) => {});
   };
 
   const handleDeletePot = (): void => {
@@ -65,43 +36,45 @@ const PotForm: React.FC = () => {
     });
   };
 
+  const handleAddPot = (): void => {
+    addPot(potInfo).then(({ data: { pot } }: IPotInfo | any) => {
+      navigate(`/pot/${pot._id}`);
+    });
+  };
+
+  //onChange method for fields
+  const updatePotInfo = (
+    ev: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+  ) => {
+    setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
+  };
+
   return (
     <div>
       <Container>
-        <FormProvider {...methods}>
-          <form>
-            <GeneralSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-              // handleSelectChange={updatePotInfoSelect}
-            ></GeneralSection>
-            <ThrowingSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-            ></ThrowingSection>
-            <TrimmingSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-            ></TrimmingSection>
-            <GlazingSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-            ></GlazingSection>
-            <ResultSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-            ></ResultSection>
-            <Button variant="outline-primary" onClick={() => navigate("/")}>
-              Cancel
-            </Button>
+        <CommonPotForm
+          potInfo={potInfo}
+          handleChange={updatePotInfo}
+        ></CommonPotForm>
+        <Button variant="outline-primary" onClick={() => navigate("/")}>
+          Cancel
+        </Button>
+        {potInfo._id !== "new" ? (
+          <div>
             <Button variant="outline-primary" onClick={handleSavePot}>
               Save
             </Button>
             <Button variant="outline-primary" onClick={handleDeletePot}>
               Delete Pot
             </Button>
-          </form>
-        </FormProvider>
+          </div>
+        ) : (
+          <div>
+            <Button variant="outline-primary" onClick={handleAddPot}>
+              Create
+            </Button>
+          </div>
+        )}
       </Container>
     </div>
   );
