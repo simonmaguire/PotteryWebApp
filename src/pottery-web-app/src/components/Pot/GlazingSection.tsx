@@ -1,12 +1,11 @@
 import { Form, Container, Card } from "react-bootstrap";
-// import { SectionProps } from "../../types";
 import { useFormContext, Controller } from "react-hook-form";
 
 function GlazingSection(props: SectionProps) {
   const {
     control,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<IPotInfo>();
 
   return (
     <Card className="form-section">
@@ -26,13 +25,16 @@ function GlazingSection(props: SectionProps) {
                   {...field}
                   type="text"
                   value={props.potInfo.glazes}
-                  name="glazes"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => props.handleChange(e)}
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
                 />
               )}
             />
+            <p>{errors.glazes?.message}</p>
           </Form.Group>
           <Form.Group>
             <Form.Label>Glaze Notes</Form.Label>
@@ -45,13 +47,16 @@ function GlazingSection(props: SectionProps) {
                   {...field}
                   as="textarea"
                   value={props.potInfo.glaze_notes}
-                  name="glaze_notes"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => props.handleChange(e)}
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
                 />
               )}
             />
+            <p>{errors.glaze_notes?.message}</p>
           </Form.Group>
           {/* <Form.Group>
             <Form.Label>Glaze Pictures</Form.Label>

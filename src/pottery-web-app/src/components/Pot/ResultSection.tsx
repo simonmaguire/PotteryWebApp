@@ -6,7 +6,7 @@ function ResultSection(props: SectionProps) {
   const {
     control,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<IPotInfo>();
 
   return (
     <Card className="form-section">
@@ -33,10 +33,14 @@ function ResultSection(props: SectionProps) {
                         e: React.ChangeEvent<
                           HTMLInputElement & HTMLSelectElement
                         >
-                      ) => props.handleChange(e)}
+                      ) => {
+                        props.handleChange(e);
+                        field.onChange(e);
+                      }}
                     />
                   )}
                 />
+                <p>{errors.result_width?.message}</p>
               </Form.Group>
             </Col>
             <Col>
@@ -56,23 +60,38 @@ function ResultSection(props: SectionProps) {
                         e: React.ChangeEvent<
                           HTMLInputElement & HTMLSelectElement
                         >
-                      ) => props.handleChange(e)}
+                      ) => {
+                        props.handleChange(e);
+                        field.onChange(e);
+                      }}
                     />
                   )}
                 />
+                <p>{errors.result_height?.message}</p>
               </Form.Group>
             </Col>
           </Row>
           <Form.Group>
             <Form.Label>Result Notes</Form.Label>
-            <Form.Control
-              as="textarea"
-              value={props.potInfo.result_notes}
+            <Controller
               name="result_notes"
-              onChange={(
-                e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-              ) => props.handleChange(e)}
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  as="textarea"
+                  value={props.potInfo.result_notes}
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
+                />
+              )}
             />
+            <p>{errors.result_notes?.message}</p>
           </Form.Group>
           {/* <Form.Group>
             <Form.Label>Result Pictures</Form.Label>

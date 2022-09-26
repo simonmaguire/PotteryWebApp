@@ -6,7 +6,7 @@ function TrimmingSection(props: SectionProps) {
   const {
     control,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<IPotInfo>();
 
   return (
     <Card className="form-section">
@@ -30,13 +30,16 @@ function TrimmingSection(props: SectionProps) {
                   {...field}
                   type="text"
                   value={props.potInfo.green_decorations}
-                  name="green_decorations"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => props.handleChange(e)}
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
                 />
               )}
             />
+            <p>{errors.green_decorations?.message}</p>
           </Form.Group>
           <Form.Group>
             <Form.Label>Trimming Notes</Form.Label>
@@ -49,13 +52,16 @@ function TrimmingSection(props: SectionProps) {
                   {...field}
                   as="textarea"
                   value={props.potInfo.trim_notes}
-                  name="trim_notes"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => props.handleChange(e)}
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
                 />
               )}
             />
+            <p>{errors.trim_notes?.message}</p>
           </Form.Group>
           {/* <Form.Group>
             <Form.Label>Trimming Pictures</Form.Label>
