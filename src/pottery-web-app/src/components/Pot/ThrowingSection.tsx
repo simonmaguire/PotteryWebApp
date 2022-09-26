@@ -1,12 +1,13 @@
 import { Form, Container, Row, Col, Card } from "react-bootstrap";
-// import { SectionProps } from "../../types";
 import { useFormContext, Controller } from "react-hook-form";
 
 function ThrowingSection(props: SectionProps) {
   const {
     control,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<IPotInfo>();
+
+  const { potInfo, handleChange } = { ...props };
 
   return (
     <Card className="form-section">
@@ -28,21 +29,26 @@ function ThrowingSection(props: SectionProps) {
                 <Controller
                   name="clay_weight"
                   control={control}
-                  defaultValue=""
+                  defaultValue={""}
                   render={({ field }) => (
-                    <Form.Control
-                      {...field}
-                      type="text"
-                      value={props.potInfo.clay_weight}
-                      name="clay_weight"
-                      onChange={(
-                        e: React.ChangeEvent<
-                          HTMLInputElement & HTMLSelectElement
-                        >
-                      ) => props.handleChange(e)}
-                    />
+                    <div>
+                      <Form.Control
+                        {...field}
+                        type="text"
+                        value={props.potInfo.clay_weight}
+                        onChange={(
+                          e: React.ChangeEvent<
+                            HTMLInputElement & HTMLSelectElement
+                          >
+                        ) => {
+                          props.handleChange(e);
+                          field.onChange(e);
+                        }}
+                      />
+                    </div>
                   )}
                 />
+                <p>{errors.clay_weight?.message}</p>
               </Form.Group>
             </Col>
           </Row>
@@ -59,15 +65,18 @@ function ThrowingSection(props: SectionProps) {
                       {...field}
                       type="text"
                       value={props.potInfo.throw_height}
-                      name="throw_height"
                       onChange={(
                         e: React.ChangeEvent<
                           HTMLInputElement & HTMLSelectElement
                         >
-                      ) => props.handleChange(e)}
+                      ) => {
+                        props.handleChange(e);
+                        field.onChange(e);
+                      }}
                     />
                   )}
                 />
+                <p>{errors.throw_height?.message}</p>
               </Form.Group>
             </Col>
             <Col>
@@ -82,15 +91,18 @@ function ThrowingSection(props: SectionProps) {
                       {...field}
                       type="text"
                       value={props.potInfo.throw_width}
-                      name="throw_width"
                       onChange={(
                         e: React.ChangeEvent<
                           HTMLInputElement & HTMLSelectElement
                         >
-                      ) => props.handleChange(e)}
+                      ) => {
+                        props.handleChange(e);
+                        field.onChange(e);
+                      }}
                     />
                   )}
                 />
+                <p>{errors.throw_width?.message}</p>
               </Form.Group>
             </Col>
           </Row>
@@ -105,13 +117,16 @@ function ThrowingSection(props: SectionProps) {
                   {...field}
                   as="textarea"
                   value={props.potInfo.throw_notes}
-                  name="throw_notes"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => props.handleChange(e)}
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
                 />
               )}
             />
+            <p>{errors.throw_notes?.message}</p>
           </Form.Group>
           {/* <Form.Group>
             <Form.Label>Throwing Pictures</Form.Label>

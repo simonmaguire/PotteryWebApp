@@ -1,13 +1,19 @@
 import React from "react";
 import { Form, Card } from "react-bootstrap";
 import { CATEGORY_OPTIONS, STAGE_OPTIONS } from "../../Constants";
-import { useFormContext, Controller } from "react-hook-form";
+import { useFormContext, Controller, FieldError } from "react-hook-form";
+
+const ErrorSection: React.FC<{ error: FieldError | undefined }> = ({
+  error,
+}) => {
+  return <p>{error?.message}</p>;
+};
 
 function GeneralSection(props: SectionProps) {
   const {
     control,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<IPotInfo>();
 
   return (
     <Card className="form-section">
@@ -40,6 +46,7 @@ function GeneralSection(props: SectionProps) {
             )}
           />
         </Form.Group>
+
         <Form.Group>
           <Form.Label>Clay</Form.Label>
           <Controller
@@ -54,10 +61,14 @@ function GeneralSection(props: SectionProps) {
                 value={props.potInfo.clay}
                 onChange={(
                   e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                ) => props.handleChange(e)}
+                ) => {
+                  props.handleChange(e);
+                  field.onChange(e);
+                }}
               />
             )}
           />
+          <p>{errors.clay?.message}</p>
         </Form.Group>
         <Form.Group>
           <Form.Label>Name</Form.Label>
@@ -66,18 +77,24 @@ function GeneralSection(props: SectionProps) {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Form.Control
-                {...field}
-                type="text"
-                name="name"
-                value={props.potInfo.name}
-                onChange={(
-                  e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                ) => props.handleChange(e)}
-              />
+              <div>
+                <Form.Control
+                  {...field}
+                  type="text"
+                  value={props.potInfo.name}
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
+                />
+              </div>
             )}
           />
+          <p>{errors.name?.message}</p>
         </Form.Group>
+
         <Form.Group>
           <Form.Label>Category</Form.Label>
           <Controller

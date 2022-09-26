@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GeneralSection from "./GeneralSection";
 import ThrowingSection from "./ThrowingSection";
 import TrimmingSection from "./TrimmingSection";
 import GlazingSection from "./GlazingSection";
 import ResultSection from "./ResultSection";
 import { useForm, FormProvider } from "react-hook-form";
+import { BLANK_POT } from "../../Constants";
+import { validationSchema } from "./FormValidationSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const CommonPotForm: React.FC<SectionProps> = (props) => {
-  const methods = useForm<IPotInfo>();
+interface CommonFormProps extends SectionProps {
+  setFormValid: (valid: boolean) => void;
+}
+
+const CommonPotForm: React.FC<CommonFormProps> = (props) => {
+  const methods = useForm<IPotInfo>({
+    mode: "all",
+    reValidateMode: "onChange",
+    defaultValues: BLANK_POT,
+    resolver: yupResolver(validationSchema),
+  });
 
   return (
     <FormProvider {...methods}>
