@@ -7,6 +7,7 @@ import { BLANK_POT } from "../../Constants";
 import { validationSchema } from "./FormValidationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addPot } from "../../API";
+import { DateTime } from "luxon";
 import GeneralSection from "./GeneralSection";
 import ThrowingSection from "./ThrowingSection";
 import TrimmingSection from "./TrimmingSection";
@@ -30,6 +31,7 @@ const PotForm: React.FC = () => {
     //TODO: Should change condition to also check that its a proper _id
     if (potInfo._id !== "new") {
       getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
+        console.log(pot);
         setPotInfo(pot);
       });
     } else {
@@ -54,11 +56,24 @@ const PotForm: React.FC = () => {
     });
   };
 
+  //Update methods
   const updatePotInfo = (
     ev: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => {
+    console.log(ev.target.value);
+
     setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
   };
+
+  // const updateDate = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  //   console.log(ev.target.name);
+
+  //   console.log(ev.target.value);
+
+  //   let updatedDT = DateTime.fromISO(ev?.target.value).toJSDate();
+  //   console.log(updatedDT);
+  //   setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
+  // };
 
   const methods = useForm<IPotInfo>({
     mode: "all",
@@ -75,23 +90,29 @@ const PotForm: React.FC = () => {
             <GeneralSection
               potInfo={potInfo}
               handleChange={updatePotInfo}
+              // updateDate={updateDate}
+
               // handleSelectChange={updatePotInfoSelect}
             ></GeneralSection>
             <ThrowingSection
               potInfo={potInfo}
               handleChange={updatePotInfo}
+              // updateDate={updateDate}
             ></ThrowingSection>
             <TrimmingSection
               potInfo={potInfo}
               handleChange={updatePotInfo}
+              // updateDate={updateDate}
             ></TrimmingSection>
             <GlazingSection
               potInfo={potInfo}
               handleChange={updatePotInfo}
+              // updateDate={updateDate}
             ></GlazingSection>
             <ResultSection
               potInfo={potInfo}
               handleChange={updatePotInfo}
+              // updateDate={updateDate}
             ></ResultSection>
           </form>
         </FormProvider>

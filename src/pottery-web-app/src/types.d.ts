@@ -17,7 +17,7 @@ type ApiDataType = {
   message: string;
   status: string;
   pots: IPot[];
-  pot?: IPot;
+  pot?: IPotInfo;
 };
 
 interface IPotInfo {
@@ -37,10 +37,14 @@ interface IPotInfo {
   result_height?: string;
   result_width?: string;
   result_notes?: string;
+  result_date?: string;
+  throw_date?: string;
+  trim_date?: string;
 }
 
 interface SectionProps {
   potInfo: IPotInfo;
+  // updateDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChange: (
     event: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => void;
