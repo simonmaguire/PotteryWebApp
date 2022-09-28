@@ -15,6 +15,9 @@ export const BLANK_POT: IPotInfo = {
   result_height: "",
   result_width: "",
   result_notes: "",
+  result_date: "",
+  throw_date: "",
+  trim_date: "",
 };
 
 export const CATEGORY_OPTIONS: string[] = [

@@ -1,5 +1,6 @@
 import { Express, NextFunction, Request, Response } from "express";
 import { IPot } from "./../types/pot";
+import { isValidObjectId } from "mongoose";
 import PotterySchema from "../models/PotterySchema";
 
 const getAllPots = async (req: Request, res: Response): Promise<void> => {
@@ -30,6 +31,7 @@ const createPot = async (req: Request, res: Response): Promise<void> => {
       | "result_height"
       | "result_width"
       | "result_notes"
+      | "throw_date"
     >;
 
     const pot: IPot = new PotterySchema({
@@ -48,6 +50,7 @@ const createPot = async (req: Request, res: Response): Promise<void> => {
       result_height: body.result_height,
       result_width: body.result_width,
       result_notes: body.result_notes,
+      throw_date: body.throw_date,
     });
 
     const newPot: IPot = await pot.save();
@@ -61,8 +64,10 @@ const createPot = async (req: Request, res: Response): Promise<void> => {
 
 const getPot = async (req: Request, res: Response): Promise<void> => {
   try {
-    const pot: IPot | null = await PotterySchema.findById(req.params.id);
-    res.status(200).json({ pot });
+    if (isValidObjectId(req.params.id)) {
+      const pot: IPot | null = await PotterySchema.findById(req.params.id);
+      res.status(200).json({ pot });
+    }
   } catch (error) {
     throw error;
   }

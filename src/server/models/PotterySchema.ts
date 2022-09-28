@@ -63,6 +63,10 @@ const PotterySchema: Schema = new Schema(
       type: String,
       required: false,
     },
+    throw_date: {
+      type: Date,
+      required: false,
+    },
   },
   { collection: "Pots" }
 );
