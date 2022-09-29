@@ -1,6 +1,6 @@
 import React from "react";
 import Main from "./components/Gallery/main";
-import PotForm from "./components/Pot/PotForm";
+import PotNotes from "./components/Pot/PotNotes";
 import Banner from "./components/banner";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/pot/:id" element={<PotForm />} />
+          <Route path="/pot/:id" element={<PotNotes />} />
         </Routes>
       </Router>
     </div>

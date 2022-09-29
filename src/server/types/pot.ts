@@ -17,4 +17,6 @@ export interface IPot extends Document {
   result_width?: string;
   result_notes?: string;
   throw_date?: Date;
+  trim_date?: Date;
+  result_date?: Date;
 }

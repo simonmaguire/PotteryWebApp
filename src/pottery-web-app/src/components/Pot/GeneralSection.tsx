@@ -3,12 +3,6 @@ import { Form, Card } from "react-bootstrap";
 import { CATEGORY_OPTIONS, STAGE_OPTIONS } from "../../Constants";
 import { useFormContext, Controller, FieldError } from "react-hook-form";
 
-const ErrorSection: React.FC<{ error: FieldError | undefined }> = ({
-  error,
-}) => {
-  return <p>{error?.message}</p>;
-};
-
 function GeneralSection(props: SectionProps) {
   const {
     control,
@@ -31,7 +25,6 @@ function GeneralSection(props: SectionProps) {
               <Form.Select
                 {...field}
                 value={props.potInfo.stage}
-                name="stage"
                 onChange={(
                   e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
                 ) => props.handleChange(e)}
@@ -57,7 +50,6 @@ function GeneralSection(props: SectionProps) {
               <Form.Control
                 {...field}
                 type="text"
-                name="clay"
                 value={props.potInfo.clay}
                 onChange={(
                   e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>

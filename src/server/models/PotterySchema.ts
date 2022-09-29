@@ -67,6 +67,14 @@ const PotterySchema: Schema = new Schema(
       type: Date,
       required: false,
     },
+    trim_date: {
+      type: Date,
+      required: false,
+    },
+    result_date: {
+      type: Date,
+      required: false,
+    },
   },
   { collection: "Pots" }
 );

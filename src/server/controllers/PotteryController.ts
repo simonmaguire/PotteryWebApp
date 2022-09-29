@@ -12,6 +12,7 @@ const getAllPots = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+//TODO: Feeling like the Pick here should be an omit?
 const createPot = async (req: Request, res: Response): Promise<void> => {
   try {
     const body = req.body as Pick<
@@ -32,6 +33,8 @@ const createPot = async (req: Request, res: Response): Promise<void> => {
       | "result_width"
       | "result_notes"
       | "throw_date"
+      | "trim_date"
+      | "result_date"
     >;
 
     const pot: IPot = new PotterySchema({
@@ -51,6 +54,8 @@ const createPot = async (req: Request, res: Response): Promise<void> => {
       result_width: body.result_width,
       result_notes: body.result_notes,
       throw_date: body.throw_date,
+      trim_date: body.trim_date,
+      result_date: body.result_date,
     });
 
     const newPot: IPot = await pot.save();
