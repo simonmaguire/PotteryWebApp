@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Form, Container, Card, Col, Row } from "react-bootstrap";
-import { DateTime } from "luxon";
-import { getBsProps } from "react-bootstrap/lib/utils/bootstrapUtils";
-import { useFormContext, Controller, useFieldArray } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
+import { dateStringToComponentValue } from "../../common/utility";
 
 function ThrowingSection(props: SectionProps) {
   const {
@@ -28,15 +27,6 @@ function ThrowingSection(props: SectionProps) {
   //   }
   // };
 
-  //Needed display in component
-  // utc added to prevent unexpected off-by 1 dates because of TZ manipulation by luxom
-  const dateValue =
-    props.potInfo.throw_date !== undefined && props.potInfo.throw_date !== ""
-      ? DateTime.fromISO(props.potInfo.throw_date, { zone: "utc" }).toISODate()
-      : "";
-
-  console.log(errors);
-
   return (
     <Card className="form-section">
       <Card.Header as="h2" className="section-header">
@@ -55,7 +45,9 @@ function ThrowingSection(props: SectionProps) {
                   render={({ field }) => (
                     <Form.Control
                       {...field}
-                      value={dateValue}
+                      value={dateStringToComponentValue(
+                        props.potInfo.throw_date
+                      )}
                       type="date"
                       onChange={async (
                         e: React.ChangeEvent<

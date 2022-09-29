@@ -1,18 +1,14 @@
 import { Form, Container, Card } from "react-bootstrap";
 import { DateTime } from "luxon";
 import { useFormContext, Controller } from "react-hook-form";
+import { dateStringToComponentValue } from "../../common/utility";
 
 function TrimmingSection(props: SectionProps) {
   const {
     control,
     trigger,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useFormContext<IPotInfo>();
-
-  const dateValue =
-    props.potInfo.trim_date !== undefined && props.potInfo.trim_date !== ""
-      ? DateTime.fromISO(props.potInfo.trim_date, { zone: "utc" }).toISODate()
-      : "";
 
   return (
     <Card className="form-section">
@@ -30,7 +26,7 @@ function TrimmingSection(props: SectionProps) {
               render={({ field }) => (
                 <Form.Control
                   {...field}
-                  value={dateValue}
+                  value={dateStringToComponentValue(props.potInfo.trim_date)}
                   type="date"
                   onChange={async (
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>

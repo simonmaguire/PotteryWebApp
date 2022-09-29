@@ -1,18 +1,12 @@
-import { DateTime } from "luxon";
 import { Form, Container, Row, Col, Card } from "react-bootstrap";
-// import { SectionProps } from "../../types";
 import { useFormContext, Controller } from "react-hook-form";
+import { dateStringToComponentValue } from "../../common/utility";
 
 function ResultSection(props: SectionProps) {
   const {
     control,
     formState: { errors },
   } = useFormContext<IPotInfo>();
-
-  const dateValue =
-    props.potInfo.result_date !== undefined && props.potInfo.result_date !== ""
-      ? DateTime.fromISO(props.potInfo.result_date, { zone: "utc" }).toISODate()
-      : "";
 
   return (
     <Card className="form-section">
@@ -30,7 +24,7 @@ function ResultSection(props: SectionProps) {
               render={({ field }) => (
                 <Form.Control
                   {...field}
-                  value={dateValue}
+                  value={dateStringToComponentValue(props.potInfo.result_date)}
                   type="date"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
