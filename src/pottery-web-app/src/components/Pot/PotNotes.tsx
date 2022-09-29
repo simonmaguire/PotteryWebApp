@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { getPot } from "../../API";
-import { BLANK_POT } from "../../Constants";
+import { BLANK_POT } from "../../common/Constants";
 import PotForm from "./PotForm";
 
 const PotNotes: React.FC = () => {
