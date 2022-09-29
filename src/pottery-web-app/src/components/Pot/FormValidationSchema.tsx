@@ -1,6 +1,5 @@
 import * as Yup from "yup";
 import { DateTime } from "luxon";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 const SHORT_TEXT_MAX = 55;
 const LONG_TEXT_MAX = 255;
@@ -11,6 +10,8 @@ const POSITIVE_NUMBER = "Must be greater than 0";
 const TYPE_NUMBER = "Must be a number";
 
 const FUTURE_DATE_MSG = "Can't be in the future";
+const TRIM_AFTER_THROW_MSG = "Can't be before Throw Date";
+const RESULT_AFTER_THROW_TRIM_MSG = "Can't be before Throw or Trim Date";
 
 //Sets val to null when it is empty string
 //Allowing Yup.number validation on text field because it won't throw and error on ""
@@ -35,12 +36,24 @@ export const validationSchema = Yup.object().shape({
   throw_date: Yup.date()
     .transform(emptyStringTransformDate)
     .max(DateTime.local().toISODate(), FUTURE_DATE_MSG),
-
   trim_date: Yup.date()
     .transform(emptyStringTransformDate)
     .max(DateTime.local().toISODate(), FUTURE_DATE_MSG)
-    .min(Yup.ref("throw_date")),
-  result_date: Yup.date().max(DateTime.local(), FUTURE_DATE_MSG).nullable(),
+    .when("throw_date", (throw_date, schema) =>
+      throw_date !== "" && throw_date !== undefined
+        ? schema.min(Yup.ref("throw_date"), TRIM_AFTER_THROW_MSG)
+        : schema
+    ),
+  result_date: Yup.date()
+    .max(DateTime.local(), FUTURE_DATE_MSG)
+    .when("throw_date", {
+      is: (value: string) => value !== "" && value !== undefined,
+      then: Yup.date().min(Yup.ref("throw_date"), RESULT_AFTER_THROW_TRIM_MSG),
+    })
+    .when("trim_date", {
+      is: (value: string) => value !== "" && value !== undefined,
+      then: Yup.date().min(Yup.ref("trim_date"), RESULT_AFTER_THROW_TRIM_MSG),
+    }),
   clay_weight: Yup.number()
     .typeError(TYPE_NUMBER)
     .transform(emptyStringTransformNumber)

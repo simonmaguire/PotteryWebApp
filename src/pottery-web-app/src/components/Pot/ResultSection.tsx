@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { Form, Container, Row, Col, Card } from "react-bootstrap";
 // import { SectionProps } from "../../types";
 import { useFormContext, Controller } from "react-hook-form";
@@ -8,6 +9,11 @@ function ResultSection(props: SectionProps) {
     formState: { errors },
   } = useFormContext<IPotInfo>();
 
+  const dateValue =
+    props.potInfo.result_date !== undefined && props.potInfo.result_date !== ""
+      ? DateTime.fromISO(props.potInfo.result_date, { zone: "utc" }).toISODate()
+      : "";
+
   return (
     <Card className="form-section">
       <Card.Header as="h2" className="section-header">
@@ -15,6 +21,28 @@ function ResultSection(props: SectionProps) {
       </Card.Header>
       <Card.Body className="form-content">
         <Container>
+          <Form.Group>
+            <Form.Label>Date</Form.Label>
+            <Controller
+              name="result_date"
+              control={control}
+              defaultValue={""}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  value={dateValue}
+                  type="date"
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
+                />
+              )}
+            />
+            <p>{errors.result_date?.message}</p>
+          </Form.Group>
           <Row>
             <Col>
               <Form.Group>

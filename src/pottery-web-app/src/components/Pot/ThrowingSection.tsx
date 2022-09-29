@@ -7,6 +7,7 @@ import { useFormContext, Controller, useFieldArray } from "react-hook-form";
 function ThrowingSection(props: SectionProps) {
   const {
     control,
+    trigger,
     formState: { errors },
   } = useFormContext<IPotInfo>();
 
@@ -34,6 +35,8 @@ function ThrowingSection(props: SectionProps) {
       ? DateTime.fromISO(props.potInfo.throw_date, { zone: "utc" }).toISODate()
       : "";
 
+  console.log(errors);
+
   return (
     <Card className="form-section">
       <Card.Header as="h2" className="section-header">
@@ -54,13 +57,18 @@ function ThrowingSection(props: SectionProps) {
                       {...field}
                       value={dateValue}
                       type="date"
-                      onChange={(
+                      onChange={async (
                         e: React.ChangeEvent<
                           HTMLInputElement & HTMLSelectElement
                         >
                       ) => {
                         props.handleChange(e);
                         field.onChange(e);
+                        const t = await trigger([
+                          "trim_date",
+                          "throw_date",
+                          "result_date",
+                        ]);
                       }}
                     />
                   )}
