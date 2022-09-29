@@ -5,6 +5,7 @@ import { useFormContext, Controller } from "react-hook-form";
 function TrimmingSection(props: SectionProps) {
   const {
     control,
+    trigger,
     formState: { errors, isValid },
   } = useFormContext<IPotInfo>();
 
@@ -36,6 +37,11 @@ function TrimmingSection(props: SectionProps) {
                   ) => {
                     props.handleChange(e);
                     field.onChange(e);
+                    const t = await trigger([
+                      "throw_date",
+                      "trim_date",
+                      "result_date",
+                    ]);
                   }}
                 />
               )}
