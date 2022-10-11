@@ -1,61 +1,42 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { updatePot, addPot, deletePot } from "../../API";
+import { useNavigate } from "react-router-dom";
+import { useForm, FormProvider } from "react-hook-form";
+import { validationSchema } from "./FormValidationSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  CancelFormButton,
+  CreateFormButton,
+  EditFormButtonGroup,
+} from "./FormButtons";
 import GeneralSection from "./GeneralSection";
 import ThrowingSection from "./ThrowingSection";
 import TrimmingSection from "./TrimmingSection";
 import GlazingSection from "./GlazingSection";
 import ResultSection from "./ResultSection";
-import { Container, Button } from "react-bootstrap";
-import { useState } from "react";
-// import { IPotInfo } from "../../types";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { updatePot, getPot, deletePot } from "../../API";
-import { useNavigate } from "react-router-dom";
 
-const PotForm: React.FC = () => {
-  let initialState: IPotInfo = {
-    _id: "",
-    stage: "",
-    clay: "",
-    name: "",
-    category: "",
-    clay_weight: "",
-    throw_height: "",
-    throw_width: "",
-    throw_notes: "",
-    green_decorations: "",
-    trim_notes: "",
-    glazes: "",
-    glaze_notes: "",
-    result_height: "",
-    result_width: "",
-    result_notes: "",
-  }; //I feel like this shouldnt be necessary
-
-  const loadPot = (): void => {
-    getPot(
-      window.location.href.substring(window.location.href.lastIndexOf("/") + 1)
-    ).then(({ data: { pot } }: IPotInfo | any) => {
-      setPotInfo(pot);
-    });
-  };
-
-  const [potInfo, setPotInfo] = useState<IPotInfo>(initialState);
-  useEffect(loadPot, []);
-
-  const methods = useForm<IPotInfo>();
+const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
   const navigate = useNavigate();
+  // const [loading, setLoading] = useState(true);
+  //TODO: Add loading visual while loading pot, dissallow data entry while loading
+  // Also loaders for saving
 
-  //TODO? Probably create different funcs for changing different input types. 2 isnt too bad but it'll grow
-  const updatePotInfo = (
-    ev: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-  ) => {
-    console.log(ev.target.name, " - ", ev.target.value);
-    setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
+  const methods = useForm<IPotInfo>({
+    mode: "onChange",
+    defaultValues: potInfo,
+    resolver: yupResolver(validationSchema),
+  });
+
+  //Button Methods
+  const handleSavePot = (): void => {
+    updatePot(methods.getValues()).then(
+      ({ data: { pot } }: IPotInfo | any) => {}
+    );
   };
 
-  const handleSavePot = (): void => {
-    updatePot(potInfo).then(({ data: { pot } }: IPotInfo | any) => {
-      console.log(pot);
+  const handleAddPot = (): void => {
+    addPot(methods.getValues()).then(({ data: { pot } }: IPotInfo | any) => {
+      navigate(`/pot/${pot._id}`);
     });
   };
 
@@ -66,43 +47,51 @@ const PotForm: React.FC = () => {
   };
 
   return (
-    <div>
-      <Container>
-        <FormProvider {...methods}>
-          <form>
-            <GeneralSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-              // handleSelectChange={updatePotInfoSelect}
-            ></GeneralSection>
-            <ThrowingSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-            ></ThrowingSection>
-            <TrimmingSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-            ></TrimmingSection>
-            <GlazingSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-            ></GlazingSection>
-            <ResultSection
-              potInfo={potInfo}
-              handleChange={updatePotInfo}
-            ></ResultSection>
-            <Button variant="outline-primary" onClick={() => navigate("/")}>
-              Cancel
-            </Button>
-            <Button variant="outline-primary" onClick={handleSavePot}>
-              Save
-            </Button>
-            <Button variant="outline-primary" onClick={handleDeletePot}>
-              Delete Pot
-            </Button>
-          </form>
-        </FormProvider>
-      </Container>
+    <div data-testid="pot-form">
+      <FormProvider {...methods}>
+        <form>
+          <GeneralSection
+            potInfo={potInfo}
+            handleChange={handleChange}
+            // updateDate={updateDate}
+
+            // handleSelectChange={updatePotInfoSelect}
+          ></GeneralSection>
+          <ThrowingSection
+            potInfo={potInfo}
+            handleChange={handleChange}
+            // updateDate={updateDate}
+          ></ThrowingSection>
+          <TrimmingSection
+            potInfo={potInfo}
+            handleChange={handleChange}
+            // updateDate={updateDate}
+          ></TrimmingSection>
+          <GlazingSection
+            potInfo={potInfo}
+            handleChange={handleChange}
+            // updateDate={updateDate}
+          ></GlazingSection>
+          <ResultSection
+            potInfo={potInfo}
+            handleChange={handleChange}
+            // updateDate={updateDate}
+          ></ResultSection>
+        </form>
+      </FormProvider>
+      {potInfo._id !== "new" ? (
+        <EditFormButtonGroup
+          onDeleteClick={handleDeletePot}
+          onSaveClick={handleSavePot}
+          saveDisabled={!methods.formState.isValid}
+        />
+      ) : (
+        <CreateFormButton
+          onClick={handleAddPot}
+          disabled={!methods.formState.isValid}
+        />
+      )}
+      <CancelFormButton onClick={() => navigate("/")} />
     </div>
   );
 };
