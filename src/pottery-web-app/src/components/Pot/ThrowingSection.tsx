@@ -37,7 +37,7 @@ function ThrowingSection(props: SectionProps) {
           <Row>
             <Col>
               <Form.Group>
-                <Form.Label>Date</Form.Label>
+                <Form.Label id="throw-date-label">Date</Form.Label>
                 <Controller
                   name="throw_date"
                   control={control}
@@ -49,6 +49,7 @@ function ThrowingSection(props: SectionProps) {
                         props.potInfo.throw_date
                       )}
                       type="date"
+                      aria-labelledby="throw-date-label"
                       onChange={async (
                         e: React.ChangeEvent<
                           HTMLInputElement & HTMLSelectElement
@@ -81,6 +82,7 @@ function ThrowingSection(props: SectionProps) {
                         {...field}
                         type="text"
                         value={props.potInfo.clay_weight}
+                        aria-label="clay-weight"
                         onChange={(
                           e: React.ChangeEvent<
                             HTMLInputElement & HTMLSelectElement
@@ -109,6 +111,7 @@ function ThrowingSection(props: SectionProps) {
                     <Form.Control
                       {...field}
                       type="text"
+                      aria-label="throw-height"
                       value={props.potInfo.throw_height}
                       onChange={(
                         e: React.ChangeEvent<
@@ -135,6 +138,7 @@ function ThrowingSection(props: SectionProps) {
                     <Form.Control
                       {...field}
                       type="text"
+                      aria-label="throw-width"
                       value={props.potInfo.throw_width}
                       onChange={(
                         e: React.ChangeEvent<
@@ -161,6 +165,7 @@ function ThrowingSection(props: SectionProps) {
                 <Form.Control
                   {...field}
                   as="textarea"
+                  aria-label="throw-notes"
                   value={props.potInfo.throw_notes}
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>

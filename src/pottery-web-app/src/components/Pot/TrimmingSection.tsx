@@ -18,7 +18,7 @@ function TrimmingSection(props: SectionProps) {
       <Card.Body>
         <Container>
           <Form.Group>
-            <Form.Label>Date</Form.Label>
+            <Form.Label id="trim-date-label">Date</Form.Label>
             <Controller
               name="trim_date"
               control={control}
@@ -28,6 +28,7 @@ function TrimmingSection(props: SectionProps) {
                   {...field}
                   value={dateStringToComponentValue(props.potInfo.trim_date)}
                   type="date"
+                  aria-labelledby="trim-date-label"
                   onChange={async (
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
                   ) => {
@@ -49,10 +50,12 @@ function TrimmingSection(props: SectionProps) {
             <Controller
               name="green_decorations"
               control={control}
+              defaultValue={""}
               render={({ field }) => (
                 <Form.Control
                   {...field}
                   type="text"
+                  aria-label="green-decorations"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
                   ) => {
@@ -74,6 +77,7 @@ function TrimmingSection(props: SectionProps) {
                 <Form.Control
                   {...field}
                   as="textarea"
+                  aria-label="trim-notes"
                   value={props.potInfo.trim_notes}
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>

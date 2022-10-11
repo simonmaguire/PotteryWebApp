@@ -3,6 +3,18 @@ import axios, { AxiosResponse } from "axios";
 
 const baseUrl: string = "http://localhost:3001";
 
+const potteryApi = {
+  getPots: async (): Promise<AxiosResponse<ApiDataType>> => {
+    try {
+      const pots: AxiosResponse<ApiDataType> = await axios.get(
+        baseUrl + "/pots"
+      );
+      return pots;
+    } catch (error) {
+      throw error;
+    }
+  },
+};
 export const getPots = async (): Promise<AxiosResponse<ApiDataType>> => {
   try {
     const pots: AxiosResponse<ApiDataType> = await axios.get(baseUrl + "/pots");
@@ -85,3 +97,5 @@ export const deletePot = async (
     throw error;
   }
 };
+
+export default potteryApi;

@@ -18,7 +18,7 @@ const Main: React.FC = () => {
   };
 
   const handleDeletePot = (_id: string): void => {
-    deletePot(_id).then(({ data: { pots } }: IPotInfo[] | any) => {
+    deletePot(_id).then(({ data: { pots } }: IPot[] | any) => {
       setPots(pots);
     });
   };

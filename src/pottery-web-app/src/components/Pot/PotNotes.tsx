@@ -1,30 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { getPot } from "../../API";
 import { BLANK_POT } from "../../common/Constants";
 import PotForm from "./PotForm";
+
+const OBJECTID_LENGTH = 24;
 
 const PotNotes: React.FC = () => {
   // const [loading, setLoading] = useState(true);
   //TODO: Add loading visual while loading pot, dissallow data entry while loading
   // Also loaders for saving
 
+  let { id } = useParams();
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [potInfo, setPotInfo] = useState<IPotInfo>({
     ...BLANK_POT,
-    _id: window.location.href.substring(
-      window.location.href.lastIndexOf("/") + 1
-    ),
+    _id: id || "",
   });
 
   const loadPot = (): void => {
-    //TODO: Should change condition to also check that its a proper _id
-    if (potInfo._id !== "new") {
-      getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
-        setPotInfo(pot);
-        setIsLoading(false);
-      });
+    //TODO: cleaner catch block
+    if (potInfo._id.length === OBJECTID_LENGTH) {
+      try {
+        getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
+          setPotInfo(pot);
+          setIsLoading(false);
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else if (potInfo._id == "new") {
+      setIsLoading(false);
     } else {
+      console.log("Wrong Id FORMAT");
     }
   };
   useEffect(loadPot, []);

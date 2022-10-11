@@ -24,6 +24,7 @@ function GlazingSection(props: SectionProps) {
                 <Form.Control
                   {...field}
                   type="text"
+                  aria-label="glazes"
                   value={props.potInfo.glazes}
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
@@ -46,6 +47,7 @@ function GlazingSection(props: SectionProps) {
                 <Form.Control
                   {...field}
                   as="textarea"
+                  aria-label="glaze-notes"
                   value={props.potInfo.glaze_notes}
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
