@@ -1,5 +1,4 @@
 import { Form, Container, Card } from "react-bootstrap";
-import { DateTime } from "luxon";
 import { useFormContext, Controller } from "react-hook-form";
 import { dateStringToComponentValue } from "../../common/utility";
 
@@ -34,11 +33,7 @@ function TrimmingSection(props: SectionProps) {
                   ) => {
                     props.handleChange(e);
                     field.onChange(e);
-                    const t = await trigger([
-                      "throw_date",
-                      "trim_date",
-                      "result_date",
-                    ]);
+                    await trigger(["throw_date", "trim_date", "result_date"]);
                   }}
                 />
               )}
