@@ -15,17 +15,18 @@ function ResultSection(props: SectionProps) {
       </Card.Header>
       <Card.Body className="form-content">
         <Container>
-          <Form.Group>
-            <Form.Label>Date</Form.Label>
-            <Controller
-              name="result_date"
-              control={control}
-              defaultValue={""}
-              render={({ field }) => (
+          <Controller
+            name="result_date"
+            control={control}
+            defaultValue={""}
+            render={({ field }) => (
+              <Form.Group>
+                <Form.Label id="result-date-label">Date</Form.Label>
                 <Form.Control
                   {...field}
                   value={dateStringToComponentValue(props.potInfo.result_date)}
                   type="date"
+                  aria-labelledby="result-date-label"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
                   ) => {
@@ -33,10 +34,10 @@ function ResultSection(props: SectionProps) {
                     field.onChange(e);
                   }}
                 />
-              )}
-            />
-            <p>{errors.result_date?.message}</p>
-          </Form.Group>
+              </Form.Group>
+            )}
+          />
+          <p>{errors.result_date?.message}</p>
           <Row>
             <Col>
               <Form.Group>
@@ -49,8 +50,8 @@ function ResultSection(props: SectionProps) {
                     <Form.Control
                       {...field}
                       type="text"
+                      aria-label="result-width"
                       value={props.potInfo.result_width}
-                      name="result_width"
                       onChange={(
                         e: React.ChangeEvent<
                           HTMLInputElement & HTMLSelectElement
@@ -76,6 +77,7 @@ function ResultSection(props: SectionProps) {
                     <Form.Control
                       {...field}
                       type="text"
+                      aria-label="result-height"
                       value={props.potInfo.result_height}
                       name="result_height"
                       onChange={(
@@ -103,6 +105,7 @@ function ResultSection(props: SectionProps) {
                 <Form.Control
                   {...field}
                   as="textarea"
+                  aria-label="result-notes"
                   value={props.potInfo.result_notes}
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>

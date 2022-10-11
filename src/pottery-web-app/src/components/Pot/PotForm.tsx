@@ -1,10 +1,14 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import { updatePot, addPot, deletePot } from "../../API";
 import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { validationSchema } from "./FormValidationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  CancelFormButton,
+  CreateFormButton,
+  EditFormButtonGroup,
+} from "./FormButtons";
 import GeneralSection from "./GeneralSection";
 import ThrowingSection from "./ThrowingSection";
 import TrimmingSection from "./TrimmingSection";
@@ -43,7 +47,7 @@ const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
   };
 
   return (
-    <div>
+    <div data-testid="pot-form">
       <FormProvider {...methods}>
         <form>
           <GeneralSection
@@ -75,33 +79,19 @@ const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
           ></ResultSection>
         </form>
       </FormProvider>
-      <Button variant="outline-primary" onClick={() => navigate("/")}>
-        Cancel
-      </Button>
       {potInfo._id !== "new" ? (
-        <div>
-          <Button
-            variant="outline-primary"
-            onClick={handleSavePot}
-            disabled={!methods.formState.isValid}
-          >
-            Save
-          </Button>
-          <Button variant="outline-primary" onClick={handleDeletePot}>
-            Delete Pot
-          </Button>
-        </div>
+        <EditFormButtonGroup
+          onDeleteClick={handleDeletePot}
+          onSaveClick={handleSavePot}
+          saveDisabled={!methods.formState.isValid}
+        />
       ) : (
-        <div>
-          <Button
-            variant="outline-primary"
-            onClick={handleAddPot}
-            disabled={!methods.formState.isValid}
-          >
-            Create
-          </Button>
-        </div>
+        <CreateFormButton
+          onClick={handleAddPot}
+          disabled={!methods.formState.isValid}
+        />
       )}
+      <CancelFormButton onClick={() => navigate("/")} />
     </div>
   );
 };

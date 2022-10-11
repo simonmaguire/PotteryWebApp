@@ -25,6 +25,7 @@ function GeneralSection(props: SectionProps) {
               <Form.Select
                 {...field}
                 value={props.potInfo.stage}
+                aria-label="stage"
                 onChange={(
                   e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
                 ) => props.handleChange(e)}
@@ -50,6 +51,7 @@ function GeneralSection(props: SectionProps) {
               <Form.Control
                 {...field}
                 type="text"
+                aria-label="clay"
                 value={props.potInfo.clay}
                 onChange={(
                   e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
@@ -73,6 +75,7 @@ function GeneralSection(props: SectionProps) {
                 <Form.Control
                   {...field}
                   type="text"
+                  aria-label="name"
                   value={props.potInfo.name}
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
@@ -98,6 +101,7 @@ function GeneralSection(props: SectionProps) {
                 {...field}
                 value={props.potInfo.category}
                 name="category"
+                aria-label="category"
                 onChange={(
                   e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
                 ) => props.handleChange(e)}

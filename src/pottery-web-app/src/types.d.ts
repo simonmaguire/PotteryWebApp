@@ -1,10 +1,9 @@
 interface IPot {
   _id: string;
-  name;
-  string;
+  name: string;
   clay: string;
   category: string;
-  status: boolean;
+  stage: string;
   createdOn?: string;
   lastUpdate?: string;
 }
