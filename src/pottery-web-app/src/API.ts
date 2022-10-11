@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from "axios";
-// import { ApiDataType, IPot } from "./types";
 
 const baseUrl: string = "http://localhost:3001";
 

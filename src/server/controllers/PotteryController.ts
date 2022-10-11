@@ -1,4 +1,4 @@
-import { Express, NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { IPot } from "./../types/pot";
 import { isValidObjectId } from "mongoose";
 import PotterySchema from "../models/PotterySchema";
