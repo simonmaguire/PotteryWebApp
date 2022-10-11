@@ -57,7 +57,7 @@ function ThrowingSection(props: SectionProps) {
                       ) => {
                         props.handleChange(e);
                         field.onChange(e);
-                        const t = await trigger([
+                        await trigger([
                           "trim_date",
                           "throw_date",
                           "result_date",

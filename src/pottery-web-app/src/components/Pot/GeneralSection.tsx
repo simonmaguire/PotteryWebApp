@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Card } from "react-bootstrap";
 import { CATEGORY_OPTIONS, STAGE_OPTIONS } from "../../common/Constants";
-import { useFormContext, Controller, FieldError } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 
 function GeneralSection(props: SectionProps) {
   const {

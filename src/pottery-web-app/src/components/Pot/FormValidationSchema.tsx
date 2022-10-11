@@ -45,6 +45,7 @@ export const validationSchema = Yup.object().shape({
         : schema
     ),
   result_date: Yup.date()
+    .transform(emptyStringTransformDate)
     .max(DateTime.local(), FUTURE_DATE_MSG)
     .when("throw_date", {
       is: (value: string) => value !== "" && value !== undefined,

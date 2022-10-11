@@ -31,13 +31,13 @@ const PotNotes: React.FC = () => {
       } catch (e) {
         console.log(e);
       }
-    } else if (potInfo._id == "new") {
+    } else if (potInfo._id === "new") {
       setIsLoading(false);
     } else {
       console.log("Wrong Id FORMAT");
     }
   };
-  useEffect(loadPot, []);
+  useEffect(loadPot, [potInfo._id]);
 
   //Update methods
   const updatePotInfo = (
