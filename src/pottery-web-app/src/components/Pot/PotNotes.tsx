@@ -8,10 +8,6 @@ import PotForm from "./PotForm";
 const OBJECTID_LENGTH = 24;
 
 const PotNotes: React.FC = () => {
-  // const [loading, setLoading] = useState(true);
-  //TODO: Add loading visual while loading pot, dissallow data entry while loading
-  // Also loaders for saving
-
   let { id } = useParams();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -39,22 +35,11 @@ const PotNotes: React.FC = () => {
   };
   useEffect(loadPot, [potInfo._id]);
 
-  //Update methods
   const updatePotInfo = (
     ev: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => {
     setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
   };
-
-  // const updateDate = (ev: React.ChangeEvent<HTMLInputElement>) => {
-  //   console.log(ev.target.name);
-
-  //   console.log(ev.target.value);
-
-  //   let updatedDT = DateTime.fromISO(ev?.target.value).toJSDate();
-  //   console.log(updatedDT);
-  //   setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
-  // };
 
   return (
     <div>
