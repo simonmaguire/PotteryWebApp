@@ -3,6 +3,18 @@ import axios, { AxiosResponse } from "axios";
 
 const baseUrl: string = "http://localhost:3001";
 
+const potteryApi = {
+  getPots: async (): Promise<AxiosResponse<ApiDataType>> => {
+    try {
+      const pots: AxiosResponse<ApiDataType> = await axios.get(
+        baseUrl + "/pots"
+      );
+      return pots;
+    } catch (error) {
+      throw error;
+    }
+  },
+};
 export const getPots = async (): Promise<AxiosResponse<ApiDataType>> => {
   try {
     const pots: AxiosResponse<ApiDataType> = await axios.get(baseUrl + "/pots");
@@ -35,9 +47,11 @@ export const addPot = async (
       name: formData.name,
       category: formData.category,
       clay_weight: formData.clay_weight,
+      throw_date: formData.throw_date,
       throw_height: formData.throw_height,
       throw_width: formData.throw_width,
       throw_notes: formData.throw_notes,
+      trim_date: formData.trim_date,
       green_decorations: formData.green_decorations,
       trim_notes: formData.trim_notes,
       glazes: formData.glazes,
@@ -45,6 +59,7 @@ export const addPot = async (
       result_height: formData.result_height,
       result_width: formData.result_width,
       result_notes: formData.result_notes,
+      result_date: formData.result_date,
     };
     const savePot: AxiosResponse<ApiDataType> = await axios.post(
       baseUrl + "/create-pot",
@@ -82,3 +97,5 @@ export const deletePot = async (
     throw error;
   }
 };
+
+export default potteryApi;

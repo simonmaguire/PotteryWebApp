@@ -1,12 +1,13 @@
 import { Form, Container, Card } from "react-bootstrap";
-// import { SectionProps } from "../../types";
 import { useFormContext, Controller } from "react-hook-form";
+import { dateStringToComponentValue } from "../../common/utility";
 
 function TrimmingSection(props: SectionProps) {
   const {
     control,
+    trigger,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<IPotInfo>();
 
   return (
     <Card className="form-section">
@@ -16,27 +17,50 @@ function TrimmingSection(props: SectionProps) {
       <Card.Body>
         <Container>
           <Form.Group>
-            <Form.Label>Date</Form.Label>
-            <Form.Control type="date" />
+            <Form.Label id="trim-date-label">Date</Form.Label>
+            <Controller
+              name="trim_date"
+              control={control}
+              defaultValue={""}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  value={dateStringToComponentValue(props.potInfo.trim_date)}
+                  type="date"
+                  aria-labelledby="trim-date-label"
+                  onChange={async (
+                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                    await trigger(["throw_date", "trim_date", "result_date"]);
+                  }}
+                />
+              )}
+            />
+            <p>{errors.trim_date?.message}</p>
           </Form.Group>
           <Form.Group>
             <Form.Label>Greenware Decorations</Form.Label>
             <Controller
               name="green_decorations"
               control={control}
-              defaultValue=""
+              defaultValue={""}
               render={({ field }) => (
                 <Form.Control
                   {...field}
                   type="text"
-                  value={props.potInfo.green_decorations}
-                  name="green_decorations"
+                  aria-label="green-decorations"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => props.handleChange(e)}
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
                 />
               )}
             />
+            <p>{errors.green_decorations?.message}</p>
           </Form.Group>
           <Form.Group>
             <Form.Label>Trimming Notes</Form.Label>
@@ -48,14 +72,18 @@ function TrimmingSection(props: SectionProps) {
                 <Form.Control
                   {...field}
                   as="textarea"
+                  aria-label="trim-notes"
                   value={props.potInfo.trim_notes}
-                  name="trim_notes"
                   onChange={(
                     e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => props.handleChange(e)}
+                  ) => {
+                    props.handleChange(e);
+                    field.onChange(e);
+                  }}
                 />
               )}
             />
+            <p>{errors.trim_notes?.message}</p>
           </Form.Group>
           {/* <Form.Group>
             <Form.Label>Trimming Pictures</Form.Label>
