@@ -35,7 +35,6 @@ const PotNotes: React.FC = () => {
   };
   useEffect(loadPot, [potInfo._id]);
 
-  //Update methods
   const updatePotInfo = (
     ev: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => {
