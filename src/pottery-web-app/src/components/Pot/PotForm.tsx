@@ -17,8 +17,6 @@ import ResultSection from "./ResultSection";
 
 const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
   const navigate = useNavigate();
-  //TODO: Add loading visual while loading pot, dissallow data entry while loading
-  // Also loaders for saving
 
   const methods = useForm<IPotInfo>({
     mode: "onChange",
@@ -26,7 +24,6 @@ const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
     resolver: yupResolver(validationSchema),
   });
 
-  //Button Methods
   const handleSavePot = (): void => {
     updatePot(methods.getValues()).then(
       ({ data: { pot } }: IPotInfo | any) => {}
