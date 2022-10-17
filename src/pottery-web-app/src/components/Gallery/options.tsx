@@ -6,7 +6,7 @@ const Options: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div id="gallery-options">
       <Button onClick={() => navigate("/pot/new")}>Add Pot</Button>
     </div>
   );

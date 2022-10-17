@@ -9,8 +9,8 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <Banner></Banner>
       <Router>
+        <Banner></Banner>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/pot/:id" element={<PotNotes />} />

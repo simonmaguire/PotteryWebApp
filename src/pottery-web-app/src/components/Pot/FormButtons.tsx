@@ -9,8 +9,11 @@ interface ICreateButtonProps {
   disabled: boolean;
 }
 
-interface IEditFormButtonGroupProps {
+interface IDeleteFormButtonProps {
   onDeleteClick: () => void;
+}
+
+interface ISaveFormButtonProps {
   onSaveClick: () => void;
   saveDisabled: boolean;
 }
@@ -31,23 +34,25 @@ export const CreateFormButton = ({ onClick, disabled }: ICreateButtonProps) => {
   );
 };
 
-export const EditFormButtonGroup = ({
-  onDeleteClick,
+export const SaveFormButton = ({
   onSaveClick,
   saveDisabled,
-}: IEditFormButtonGroupProps) => {
+}: ISaveFormButtonProps) => {
   return (
-    <div>
-      <Button
-        variant="outline-primary"
-        onClick={onSaveClick}
-        disabled={saveDisabled}
-      >
-        Save
-      </Button>
-      <Button variant="outline-primary" onClick={onDeleteClick}>
-        Delete Pot
-      </Button>
-    </div>
+    <Button
+      variant="outline-primary"
+      onClick={onSaveClick}
+      disabled={saveDisabled}
+    >
+      Save
+    </Button>
+  );
+};
+
+export const DeleteFormButton = ({ onDeleteClick }: IDeleteFormButtonProps) => {
+  return (
+    <Button variant="outline-primary" onClick={onDeleteClick}>
+      Delete Pot
+    </Button>
   );
 };

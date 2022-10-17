@@ -16,6 +16,8 @@ const PotNotes: React.FC = () => {
     _id: id || "",
   });
 
+  console.log(potInfo);
+
   const loadPot = (): void => {
     //TODO: cleaner catch block
     if (potInfo._id.length === OBJECTID_LENGTH) {
@@ -39,6 +41,7 @@ const PotNotes: React.FC = () => {
   const updatePotInfo = (
     ev: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => {
+    console.log(ev.target.name, " - ", ev.target.value);
     setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
   };
 

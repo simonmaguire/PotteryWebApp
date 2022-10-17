@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Card } from "react-bootstrap";
 import { CATEGORY_OPTIONS, STAGE_OPTIONS } from "../../common/Constants";
 import { useFormContext, Controller } from "react-hook-form";
+import { forEachChild } from "typescript";
 
 function GeneralSection(props: SectionProps) {
   const {
@@ -28,7 +29,10 @@ function GeneralSection(props: SectionProps) {
                 aria-label="stage"
                 onChange={(
                   e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                ) => props.handleChange(e)}
+                ) => {
+                  props.handleChange(e);
+                  field.onChange(e);
+                }}
               >
                 <option value=""></option>
                 {STAGE_OPTIONS.map((x, y) => (
@@ -104,7 +108,10 @@ function GeneralSection(props: SectionProps) {
                 aria-label="category"
                 onChange={(
                   e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                ) => props.handleChange(e)}
+                ) => {
+                  props.handleChange(e);
+                  field.onChange(e);
+                }}
               >
                 <option value=""></option>
                 {CATEGORY_OPTIONS.map((x, y) => (

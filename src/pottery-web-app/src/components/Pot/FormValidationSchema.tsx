@@ -25,6 +25,8 @@ const emptyStringTransformDate = (_: any, val: string | undefined) => {
     : undefined;
 };
 export const validationSchema = Yup.object().shape({
+  category: Yup.string(),
+  stage: Yup.string(),
   clay: Yup.string().max(SHORT_TEXT_MAX, SHORT_TEXT_MAX_MSG),
   glazes: Yup.string().max(SHORT_TEXT_MAX, SHORT_TEXT_MAX_MSG),
   glaze_notes: Yup.string().max(LONG_TEXT_MAX, LONG_TEXT_MAX_MSG),
@@ -35,7 +37,8 @@ export const validationSchema = Yup.object().shape({
   trim_notes: Yup.string().max(LONG_TEXT_MAX, LONG_TEXT_MAX_MSG),
   throw_date: Yup.date()
     .transform(emptyStringTransformDate)
-    .max(DateTime.local().toISODate(), FUTURE_DATE_MSG),
+    .max(DateTime.local().toISODate(), FUTURE_DATE_MSG)
+    .nullable(),
   trim_date: Yup.date()
     .transform(emptyStringTransformDate)
     .max(DateTime.local().toISODate(), FUTURE_DATE_MSG)
@@ -43,7 +46,8 @@ export const validationSchema = Yup.object().shape({
       throw_date !== "" && throw_date !== undefined
         ? schema.min(Yup.ref("throw_date"), TRIM_AFTER_THROW_MSG)
         : schema
-    ),
+    )
+    .nullable(),
   result_date: Yup.date()
     .transform(emptyStringTransformDate)
     .max(DateTime.local(), FUTURE_DATE_MSG)
@@ -54,7 +58,8 @@ export const validationSchema = Yup.object().shape({
     .when("trim_date", {
       is: (value: string) => value !== "" && value !== undefined,
       then: Yup.date().min(Yup.ref("trim_date"), RESULT_AFTER_THROW_TRIM_MSG),
-    }),
+    })
+    .nullable(),
   clay_weight: Yup.number()
     .typeError(TYPE_NUMBER)
     .transform(emptyStringTransformNumber)

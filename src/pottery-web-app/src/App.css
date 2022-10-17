@@ -1,51 +1,98 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: #fefae0;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  height: 100%;
 }
 
 #banner {
-  background-color: #282c34;
+  background-color: #283618;
   height: 50vh;
   max-height: 100px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  color: white;
+  font-size: 42px;
+  font-weight: 400;
+  color: #fefae0;
+  padding-left: 25px;
+  border-radius: 0px 0px 12px 12px;
+}
+
+#banner h1:hover {
+  cursor: pointer;
+}
+
+#gallery-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  padding: 10px 10px 10px 0px;
+  /* padding-top padding-bottom: 10px; */
+}
+
+.btn-primary {
+  --bs-btn-bg: #dda15e;
+  --bs-btn-border-color: #dda15e;
+  --bs-btn-hover-color: #fefae0;
+  --bs-btn-hover-bg: #bc6c25;
+  --bs-btn-hover-border-color: #dda15e;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #dda15e;
+  --bs-btn-active-bg: #dda15e;
+  --bs-btn-active-border-color: #dda15e;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #dda15e;
+  --bs-btn-disabled-bg: #dda15e;
+  --bs-btn-disabled-border-color: #dda15e;
+  color: #fefae0;
+}
+
+.pot-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: center;
+  background-color: #606c38;
+  color: #fefae0;
+  margin-bottom: 5px;
+  border-radius: 8px;
+}
+
+#gallery-header {
+  background-color: #424b27;
+}
+#gallery-header:hover {
+  cursor: auto;
+}
+
+.pot-row:hover {
+  background-color: #5a6435;
+  cursor: pointer;
+}
+
+.pot-row p {
+  align-items: center;
+  width: 23%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-right: #000000;
+  border-right-style: solid;
+  border-right-width: 1px;
+}
+
+.pot-row div {
+  align-items: center;
+  width: 8%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.pot-action:hover {
+  color: #dda15e;
 }
 
 #form-section {
@@ -73,4 +120,33 @@
 
 #pottery-table {
   width: 100%;
+}
+
+#button-bar {
+  position: fixed;
+  bottom: 0%;
+  width: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #606c38;
+  padding: 10px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+#button-bar .btn {
+  --bs-btn-bg: #606c38;
+  --bs-btn-border-color: #dda15e;
+  --bs-btn-hover-color: #fefae0;
+  --bs-btn-hover-bg: #bc6c25;
+  --bs-btn-hover-border-color: #dda15e;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #dda15e;
+  --bs-btn-active-bg: #dda15e;
+  --bs-btn-active-border-color: #dda15e;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fefae0;
+  --bs-btn-disabled-bg: #606c38;
+  --bs-btn-disabled-border-color: #dda15e;
+  color: #fefae0;
 }

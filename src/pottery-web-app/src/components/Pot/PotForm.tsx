@@ -1,19 +1,15 @@
 import React from "react";
 import { updatePot, addPot, deletePot } from "../../API";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { validationSchema } from "./FormValidationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  CancelFormButton,
-  CreateFormButton,
-  EditFormButtonGroup,
-} from "./FormButtons";
 import GeneralSection from "./GeneralSection";
 import ThrowingSection from "./ThrowingSection";
 import TrimmingSection from "./TrimmingSection";
 import GlazingSection from "./GlazingSection";
 import ResultSection from "./ResultSection";
+import ButtonBar from "./ButtonBar";
 
 const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
   const navigate = useNavigate();
@@ -24,13 +20,19 @@ const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
     resolver: yupResolver(validationSchema),
   });
 
+  console.log(methods.getValues());
+  console.log(methods.formState.isValid, ": ", methods.formState.errors);
   const handleSavePot = (): void => {
+    console.log(methods.getValues());
+
     updatePot(methods.getValues()).then(
       ({ data: { pot } }: IPotInfo | any) => {}
     );
   };
 
   const handleAddPot = (): void => {
+    console.log(methods.getValues());
+
     addPot(methods.getValues()).then(({ data: { pot } }: IPotInfo | any) => {
       navigate(`/pot/${pot._id}`);
     });
@@ -68,19 +70,16 @@ const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
           ></ResultSection>
         </form>
       </FormProvider>
-      {potInfo._id !== "new" ? (
-        <EditFormButtonGroup
-          onDeleteClick={handleDeletePot}
-          onSaveClick={handleSavePot}
-          saveDisabled={!methods.formState.isValid}
-        />
-      ) : (
-        <CreateFormButton
-          onClick={handleAddPot}
-          disabled={!methods.formState.isValid}
-        />
-      )}
-      <CancelFormButton onClick={() => navigate("/")} />
+      <ButtonBar
+        potId={potInfo._id}
+        handleAddPot={handleAddPot}
+        handleSavePot={handleSavePot}
+        handleDeletePot={handleDeletePot}
+        handleCancel={() => {
+          navigate("/");
+        }}
+        formIsValid={methods.formState.isValid}
+      ></ButtonBar>
     </div>
   );
 };

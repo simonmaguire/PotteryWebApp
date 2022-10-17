@@ -11,20 +11,31 @@ const PotRow: React.FC<PotRowProps> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <tr aria-label="pot-row">
-      <td>{props.pot.name}</td>
-      <td>{props.pot.stage}</td>
-      <td>{props.pot.clay}</td>
-      <td>{props.pot.category}</td>
-      <td>
+    <div
+      className="pot-row"
+      aria-label="pot-row"
+      role="listitem"
+      onClick={() => navigate(`/pot/${props.pot._id}`)}
+    >
+      <p>{props.pot.name}</p>
+      <p>{props.pot.category}</p>
+      <p>{props.pot.stage}</p>
+      <p>{props.pot.clay}</p>
+      <div>
         <BsTrashFill
+          className="pot-action"
           role="img"
           aria-label="delete-icon"
           onClick={() => props.handleDelete(props.pot._id)}
         />
-        <BsPencilSquare onClick={() => navigate(`/pot/${props.pot._id}`)} />
-      </td>
-    </tr>
+        <BsPencilSquare
+          className="pot-action"
+          role="img"
+          aria-label="edit-icon"
+          onClick={() => navigate(`/pot/${props.pot._id}`)}
+        />
+      </div>
+    </div>
   );
 };
 

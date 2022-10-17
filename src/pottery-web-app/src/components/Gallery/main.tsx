@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import ListView from "./ListView";
 import Options from "./options";
@@ -24,10 +25,10 @@ const Main: React.FC = () => {
   };
 
   return (
-    <div id="Main">
+    <Container id="Main">
       <Options></Options>
       <ListView pots={pots} handleDeletePot={handleDeletePot}></ListView>
-    </div>
+    </Container>
   );
 };
 
