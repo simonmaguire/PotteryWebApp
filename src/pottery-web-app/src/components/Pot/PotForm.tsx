@@ -11,7 +11,7 @@ import GlazingSection from "./GlazingSection";
 import ResultSection from "./ResultSection";
 import ButtonBar from "./ButtonBar";
 
-const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
+const PotForm: React.FC<SectionProps> = ({ potInfo }) => {
   const navigate = useNavigate();
 
   const methods = useForm<IPotInfo>({
@@ -21,18 +21,15 @@ const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
   });
 
   console.log(methods.getValues());
-  console.log(methods.formState.isValid, ": ", methods.formState.errors);
-  const handleSavePot = (): void => {
-    console.log(methods.getValues());
+  console.log(methods.formState.errors);
 
+  const handleSavePot = (): void => {
     updatePot(methods.getValues()).then(
       ({ data: { pot } }: IPotInfo | any) => {}
     );
   };
 
   const handleAddPot = (): void => {
-    console.log(methods.getValues());
-
     addPot(methods.getValues()).then(({ data: { pot } }: IPotInfo | any) => {
       navigate(`/pot/${pot._id}`);
     });
@@ -44,42 +41,37 @@ const PotForm: React.FC<SectionProps> = ({ potInfo, handleChange }) => {
     });
   };
 
+  const onCreateOrSave = (data: IPotInfo) => {
+    if (data._id !== "new") {
+      updatePot(data);
+    } else {
+      addPot(data).then(({ data: { pot } }: IPotInfo | any) => {
+        navigate(`/pot/${pot._id}`);
+      });
+    }
+  };
+
   return (
     <div data-testid="pot-form">
       <FormProvider {...methods}>
-        <form>
-          <GeneralSection
-            potInfo={potInfo}
-            handleChange={handleChange}
-          ></GeneralSection>
-          <ThrowingSection
-            potInfo={potInfo}
-            handleChange={handleChange}
-          ></ThrowingSection>
-          <TrimmingSection
-            potInfo={potInfo}
-            handleChange={handleChange}
-          ></TrimmingSection>
-          <GlazingSection
-            potInfo={potInfo}
-            handleChange={handleChange}
-          ></GlazingSection>
-          <ResultSection
-            potInfo={potInfo}
-            handleChange={handleChange}
-          ></ResultSection>
+        <form onSubmit={methods.handleSubmit(onCreateOrSave)}>
+          <GeneralSection potInfo={potInfo}></GeneralSection>
+          <ThrowingSection potInfo={potInfo}></ThrowingSection>
+          <TrimmingSection potInfo={potInfo}></TrimmingSection>
+          <GlazingSection potInfo={potInfo}></GlazingSection>
+          <ResultSection potInfo={potInfo}></ResultSection>
+          <ButtonBar
+            potId={potInfo._id}
+            handleAddPot={handleAddPot}
+            handleSavePot={handleSavePot}
+            handleDeletePot={handleDeletePot}
+            handleCancel={() => {
+              navigate("/");
+            }}
+            formIsValid={methods.formState.isValid}
+          ></ButtonBar>
         </form>
       </FormProvider>
-      <ButtonBar
-        potId={potInfo._id}
-        handleAddPot={handleAddPot}
-        handleSavePot={handleSavePot}
-        handleDeletePot={handleDeletePot}
-        handleCancel={() => {
-          navigate("/");
-        }}
-        formIsValid={methods.formState.isValid}
-      ></ButtonBar>
     </div>
   );
 };

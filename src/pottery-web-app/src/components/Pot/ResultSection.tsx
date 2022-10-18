@@ -24,15 +24,9 @@ function ResultSection(props: SectionProps) {
                 <Form.Label id="result-date-label">Date</Form.Label>
                 <Form.Control
                   {...field}
-                  value={dateStringToComponentValue(props.potInfo.result_date)}
                   type="date"
+                  value={dateStringToComponentValue(field.value)}
                   aria-labelledby="result-date-label"
-                  onChange={(
-                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => {
-                    props.handleChange(e);
-                    field.onChange(e);
-                  }}
                 />
               </Form.Group>
             )}
@@ -51,15 +45,6 @@ function ResultSection(props: SectionProps) {
                       {...field}
                       type="text"
                       aria-label="result-width"
-                      value={props.potInfo.result_width}
-                      onChange={(
-                        e: React.ChangeEvent<
-                          HTMLInputElement & HTMLSelectElement
-                        >
-                      ) => {
-                        props.handleChange(e);
-                        field.onChange(e);
-                      }}
                     />
                   )}
                 />
@@ -78,16 +63,7 @@ function ResultSection(props: SectionProps) {
                       {...field}
                       type="text"
                       aria-label="result-height"
-                      value={props.potInfo.result_height}
                       name="result_height"
-                      onChange={(
-                        e: React.ChangeEvent<
-                          HTMLInputElement & HTMLSelectElement
-                        >
-                      ) => {
-                        props.handleChange(e);
-                        field.onChange(e);
-                      }}
                     />
                   )}
                 />
@@ -106,13 +82,6 @@ function ResultSection(props: SectionProps) {
                   {...field}
                   as="textarea"
                   aria-label="result-notes"
-                  value={props.potInfo.result_notes}
-                  onChange={(
-                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => {
-                    props.handleChange(e);
-                    field.onChange(e);
-                  }}
                 />
               )}
             />

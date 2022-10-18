@@ -45,17 +45,12 @@ function ThrowingSection(props: SectionProps) {
                   render={({ field }) => (
                     <Form.Control
                       {...field}
-                      value={dateStringToComponentValue(
-                        props.potInfo.throw_date
-                      )}
                       type="date"
                       aria-labelledby="throw-date-label"
+                      value={dateStringToComponentValue(field.value)}
                       onChange={async (
-                        e: React.ChangeEvent<
-                          HTMLInputElement & HTMLSelectElement
-                        >
+                        e: React.ChangeEvent<HTMLInputElement>
                       ) => {
-                        props.handleChange(e);
                         field.onChange(e);
                         await trigger([
                           "trim_date",
@@ -81,16 +76,7 @@ function ThrowingSection(props: SectionProps) {
                       <Form.Control
                         {...field}
                         type="text"
-                        value={props.potInfo.clay_weight}
                         aria-label="clay-weight"
-                        onChange={(
-                          e: React.ChangeEvent<
-                            HTMLInputElement & HTMLSelectElement
-                          >
-                        ) => {
-                          props.handleChange(e);
-                          field.onChange(e);
-                        }}
                       />
                     </div>
                   )}
@@ -112,15 +98,6 @@ function ThrowingSection(props: SectionProps) {
                       {...field}
                       type="text"
                       aria-label="throw-height"
-                      value={props.potInfo.throw_height}
-                      onChange={(
-                        e: React.ChangeEvent<
-                          HTMLInputElement & HTMLSelectElement
-                        >
-                      ) => {
-                        props.handleChange(e);
-                        field.onChange(e);
-                      }}
                     />
                   )}
                 />
@@ -139,15 +116,6 @@ function ThrowingSection(props: SectionProps) {
                       {...field}
                       type="text"
                       aria-label="throw-width"
-                      value={props.potInfo.throw_width}
-                      onChange={(
-                        e: React.ChangeEvent<
-                          HTMLInputElement & HTMLSelectElement
-                        >
-                      ) => {
-                        props.handleChange(e);
-                        field.onChange(e);
-                      }}
                     />
                   )}
                 />
@@ -166,13 +134,6 @@ function ThrowingSection(props: SectionProps) {
                   {...field}
                   as="textarea"
                   aria-label="throw-notes"
-                  value={props.potInfo.throw_notes}
-                  onChange={(
-                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => {
-                    props.handleChange(e);
-                    field.onChange(e);
-                  }}
                 />
               )}
             />

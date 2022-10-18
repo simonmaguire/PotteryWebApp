@@ -25,13 +25,10 @@ function TrimmingSection(props: SectionProps) {
               render={({ field }) => (
                 <Form.Control
                   {...field}
-                  value={dateStringToComponentValue(props.potInfo.trim_date)}
                   type="date"
                   aria-labelledby="trim-date-label"
-                  onChange={async (
-                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => {
-                    props.handleChange(e);
+                  value={dateStringToComponentValue(field.value)}
+                  onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
                     field.onChange(e);
                     await trigger(["throw_date", "trim_date", "result_date"]);
                   }}
@@ -51,12 +48,6 @@ function TrimmingSection(props: SectionProps) {
                   {...field}
                   type="text"
                   aria-label="green-decorations"
-                  onChange={(
-                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => {
-                    props.handleChange(e);
-                    field.onChange(e);
-                  }}
                 />
               )}
             />
@@ -73,13 +64,6 @@ function TrimmingSection(props: SectionProps) {
                   {...field}
                   as="textarea"
                   aria-label="trim-notes"
-                  value={props.potInfo.trim_notes}
-                  onChange={(
-                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => {
-                    props.handleChange(e);
-                    field.onChange(e);
-                  }}
                 />
               )}
             />

@@ -28,7 +28,12 @@ export const CancelFormButton = ({ onClick }: ICancelButtonProps) => {
 
 export const CreateFormButton = ({ onClick, disabled }: ICreateButtonProps) => {
   return (
-    <Button variant="outline-primary" onClick={onClick} disabled={disabled}>
+    <Button
+      variant="outline-primary"
+      // onClick={onClick}
+      type="submit"
+      disabled={disabled}
+    >
       Create
     </Button>
   );
@@ -41,7 +46,8 @@ export const SaveFormButton = ({
   return (
     <Button
       variant="outline-primary"
-      onClick={onSaveClick}
+      // onClick={onSaveClick}
+      type="submit"
       disabled={saveDisabled}
     >
       Save

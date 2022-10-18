@@ -51,14 +51,16 @@ export const validationSchema = Yup.object().shape({
   result_date: Yup.date()
     .transform(emptyStringTransformDate)
     .max(DateTime.local(), FUTURE_DATE_MSG)
-    .when("throw_date", {
-      is: (value: string) => value !== "" && value !== undefined,
-      then: Yup.date().min(Yup.ref("throw_date"), RESULT_AFTER_THROW_TRIM_MSG),
-    })
-    .when("trim_date", {
-      is: (value: string) => value !== "" && value !== undefined,
-      then: Yup.date().min(Yup.ref("trim_date"), RESULT_AFTER_THROW_TRIM_MSG),
-    })
+    .when("throw_date", (throw_date, schema) =>
+      throw_date !== undefined
+        ? schema.min(Yup.ref("throw_date"), RESULT_AFTER_THROW_TRIM_MSG)
+        : schema
+    )
+    .when("trim_date", (trim_date, schema) =>
+      trim_date !== undefined
+        ? schema.min(Yup.ref("trim_date"), RESULT_AFTER_THROW_TRIM_MSG)
+        : schema
+    )
     .nullable(),
   clay_weight: Yup.number()
     .typeError(TYPE_NUMBER)

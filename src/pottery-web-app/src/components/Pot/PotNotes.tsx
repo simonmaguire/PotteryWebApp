@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { getPot } from "../../API";
 import { BLANK_POT } from "../../common/Constants";
+import { initialValuesAsStrings } from "../../common/utility";
 import PotForm from "./PotForm";
 
 const OBJECTID_LENGTH = 24;
@@ -16,14 +17,12 @@ const PotNotes: React.FC = () => {
     _id: id || "",
   });
 
-  console.log(potInfo);
-
   const loadPot = (): void => {
     //TODO: cleaner catch block
     if (potInfo._id.length === OBJECTID_LENGTH) {
       try {
         getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
-          setPotInfo(pot);
+          setPotInfo(initialValuesAsStrings(pot));
           setIsLoading(false);
         });
       } catch (e) {
@@ -35,24 +34,12 @@ const PotNotes: React.FC = () => {
       console.log("Wrong Id FORMAT");
     }
   };
-  useEffect(loadPot, [potInfo._id]);
-
-  //Update methods
-  const updatePotInfo = (
-    ev: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-  ) => {
-    console.log(ev.target.name, " - ", ev.target.value);
-    setPotInfo({ ...potInfo, [ev.target.name]: ev.target.value });
-  };
+  useEffect(loadPot, []);
 
   return (
     <div>
       <Container>
-        {isLoading ? (
-          <div>...Loading</div>
-        ) : (
-          <PotForm potInfo={potInfo} handleChange={updatePotInfo} />
-        )}
+        {isLoading ? <div>...Loading</div> : <PotForm potInfo={potInfo} />}
       </Container>
     </div>
   );

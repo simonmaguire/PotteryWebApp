@@ -23,17 +23,7 @@ function GeneralSection(props: SectionProps) {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Form.Select
-                {...field}
-                value={props.potInfo.stage}
-                aria-label="stage"
-                onChange={(
-                  e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                ) => {
-                  props.handleChange(e);
-                  field.onChange(e);
-                }}
-              >
+              <Form.Select {...field} aria-label="stage">
                 <option value=""></option>
                 {STAGE_OPTIONS.map((x, y) => (
                   <option value={x} key={y}>
@@ -52,18 +42,7 @@ function GeneralSection(props: SectionProps) {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Form.Control
-                {...field}
-                type="text"
-                aria-label="clay"
-                value={props.potInfo.clay}
-                onChange={(
-                  e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                ) => {
-                  props.handleChange(e);
-                  field.onChange(e);
-                }}
-              />
+              <Form.Control {...field} type="text" aria-label="clay" />
             )}
           />
           <p>{errors.clay?.message}</p>
@@ -76,18 +55,7 @@ function GeneralSection(props: SectionProps) {
             defaultValue=""
             render={({ field }) => (
               <div>
-                <Form.Control
-                  {...field}
-                  type="text"
-                  aria-label="name"
-                  value={props.potInfo.name}
-                  onChange={(
-                    e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                  ) => {
-                    props.handleChange(e);
-                    field.onChange(e);
-                  }}
-                />
+                <Form.Control {...field} type="text" aria-label="name" />
               </div>
             )}
           />
@@ -101,18 +69,7 @@ function GeneralSection(props: SectionProps) {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <Form.Select
-                {...field}
-                value={props.potInfo.category}
-                name="category"
-                aria-label="category"
-                onChange={(
-                  e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-                ) => {
-                  props.handleChange(e);
-                  field.onChange(e);
-                }}
-              >
+              <Form.Select {...field} name="category" aria-label="category">
                 <option value=""></option>
                 {CATEGORY_OPTIONS.map((x, y) => (
                   <option value={x} key={y}>
