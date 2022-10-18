@@ -2,7 +2,7 @@ import { Form, Container, Card } from "react-bootstrap";
 import { useFormContext, Controller } from "react-hook-form";
 import { dateStringToComponentValue } from "../../common/utility";
 
-function TrimmingSection(props: SectionProps) {
+function TrimmingSection() {
   const {
     control,
     trigger,

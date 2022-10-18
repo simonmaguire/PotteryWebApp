@@ -2,7 +2,7 @@ import { Form, Container, Row, Col, Card } from "react-bootstrap";
 import { useFormContext, Controller } from "react-hook-form";
 import { dateStringToComponentValue } from "../../common/utility";
 
-function ResultSection(props: SectionProps) {
+function ResultSection() {
   const {
     control,
     formState: { errors },

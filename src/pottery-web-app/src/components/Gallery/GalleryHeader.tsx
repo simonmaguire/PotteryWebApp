@@ -1,6 +1,4 @@
-import React from "react";
-
-const GalleryHeader: React.FC = () => {
+const GalleryHeader = () => {
   return (
     <div id="gallery-header" className="pot-row" aria-label="pot-row">
       <div id="pot-row-attributes">

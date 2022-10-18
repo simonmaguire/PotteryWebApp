@@ -1,8 +1,7 @@
-import React from "react";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 
-const Options: React.FC = () => {
+const Options = () => {
   const navigate = useNavigate();
 
   return (

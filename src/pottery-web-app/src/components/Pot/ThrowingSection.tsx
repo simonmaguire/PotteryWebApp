@@ -3,7 +3,7 @@ import { Form, Container, Card, Col, Row } from "react-bootstrap";
 import { useFormContext, Controller } from "react-hook-form";
 import { dateStringToComponentValue } from "../../common/utility";
 
-function ThrowingSection(props: SectionProps) {
+function ThrowingSection() {
   const {
     control,
     trigger,

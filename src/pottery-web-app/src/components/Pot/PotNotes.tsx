@@ -8,7 +8,7 @@ import PotForm from "./PotForm";
 
 const OBJECTID_LENGTH = 24;
 
-const PotNotes: React.FC = () => {
+const PotNotes = () => {
   let { id } = useParams();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -17,8 +17,14 @@ const PotNotes: React.FC = () => {
     _id: id || "",
   });
 
+  const setIdAfterSave = (id: string) => {
+    setPotInfo({ ...potInfo, _id: id });
+  };
+
   const loadPot = (): void => {
     //TODO: cleaner catch block
+    console.log(potInfo._id);
+
     if (potInfo._id.length === OBJECTID_LENGTH) {
       try {
         getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
@@ -39,7 +45,11 @@ const PotNotes: React.FC = () => {
   return (
     <div>
       <Container>
-        {isLoading ? <div>...Loading</div> : <PotForm potInfo={potInfo} />}
+        {isLoading ? (
+          <div>...Loading</div>
+        ) : (
+          <PotForm potInfo={potInfo} setIdAfterSave={setIdAfterSave} />
+        )}
       </Container>
     </div>
   );

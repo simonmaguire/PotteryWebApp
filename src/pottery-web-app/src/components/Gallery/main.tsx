@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import { useState, useEffect } from "react";
 import ListView from "./ListView";
 import Options from "./options";
 import { getPots, deletePot } from "../../API";
 
-const Main: React.FC = () => {
+const Main = () => {
   const [pots, setPots] = useState<IPot[]>([]);
 
   useEffect(() => {

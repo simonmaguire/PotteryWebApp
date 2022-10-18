@@ -1,7 +1,7 @@
 import { Form, Container, Card } from "react-bootstrap";
 import { useFormContext, Controller } from "react-hook-form";
 
-function GlazingSection(props: SectionProps) {
+function GlazingSection() {
   const {
     control,
     formState: { errors },

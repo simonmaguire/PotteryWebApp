@@ -8,32 +8,27 @@ import {
 
 interface ButtonBarProps {
   potId: string;
-  handleSavePot: () => void;
-  handleAddPot: () => void;
   handleDeletePot: () => void;
   handleCancel: () => void;
   formIsValid: boolean;
+  loading: boolean;
 }
 
 const ButtonBar: React.FC<ButtonBarProps> = ({
   potId,
-  handleSavePot,
   handleDeletePot,
-  handleAddPot,
   handleCancel,
   formIsValid,
+  loading,
 }) => {
   return (
     <div id="button-bar">
       {potId !== "new" && (
-        <SaveFormButton
-          onSaveClick={handleSavePot}
-          saveDisabled={!formIsValid}
-        />
+        <SaveFormButton loading={loading} disabled={!formIsValid} />
       )}
-      {potId !== "new" && <DeleteFormButton onDeleteClick={handleDeletePot} />}
+      {potId !== "new" && <DeleteFormButton onClick={handleDeletePot} />}
       {potId === "new" && (
-        <CreateFormButton onClick={handleAddPot} disabled={!formIsValid} />
+        <CreateFormButton loading={loading} disabled={!formIsValid} />
       )}
       <CancelFormButton onClick={handleCancel} />
     </div>

@@ -1,10 +1,8 @@
-import React from "react";
 import { Form, Card } from "react-bootstrap";
 import { CATEGORY_OPTIONS, STAGE_OPTIONS } from "../../common/Constants";
 import { useFormContext, Controller } from "react-hook-form";
-import { forEachChild } from "typescript";
 
-function GeneralSection(props: SectionProps) {
+function GeneralSection() {
   const {
     control,
     formState: { errors },

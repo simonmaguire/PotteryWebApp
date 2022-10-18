@@ -1,24 +1,15 @@
 import { Button } from "react-bootstrap";
 
-interface ICancelButtonProps {
+interface IButtonProps {
   onClick: () => void;
 }
 
-interface ICreateButtonProps {
-  onClick: () => void;
+interface IFormSubmitButtonProps {
+  loading: boolean;
   disabled: boolean;
 }
 
-interface IDeleteFormButtonProps {
-  onDeleteClick: () => void;
-}
-
-interface ISaveFormButtonProps {
-  onSaveClick: () => void;
-  saveDisabled: boolean;
-}
-
-export const CancelFormButton = ({ onClick }: ICancelButtonProps) => {
+export const CancelFormButton = ({ onClick }: IButtonProps) => {
   return (
     <Button variant="outline-primary" onClick={onClick}>
       Cancel
@@ -26,38 +17,31 @@ export const CancelFormButton = ({ onClick }: ICancelButtonProps) => {
   );
 };
 
-export const CreateFormButton = ({ onClick, disabled }: ICreateButtonProps) => {
+export const CreateFormButton = ({
+  disabled,
+  loading,
+}: IFormSubmitButtonProps) => {
   return (
-    <Button
-      variant="outline-primary"
-      // onClick={onClick}
-      type="submit"
-      disabled={disabled}
-    >
-      Create
+    <Button variant="outline-primary" type="submit" disabled={disabled}>
+      {!loading ? "Create" : "...Loading"}
     </Button>
   );
 };
 
 export const SaveFormButton = ({
-  onSaveClick,
-  saveDisabled,
-}: ISaveFormButtonProps) => {
+  disabled,
+  loading,
+}: IFormSubmitButtonProps) => {
   return (
-    <Button
-      variant="outline-primary"
-      // onClick={onSaveClick}
-      type="submit"
-      disabled={saveDisabled}
-    >
-      Save
+    <Button variant="outline-primary" type="submit" disabled={disabled}>
+      {!loading ? "Save" : "...Loading"}
     </Button>
   );
 };
 
-export const DeleteFormButton = ({ onDeleteClick }: IDeleteFormButtonProps) => {
+export const DeleteFormButton = ({ onClick }: IButtonProps) => {
   return (
-    <Button variant="outline-primary" onClick={onDeleteClick}>
+    <Button variant="outline-primary" onClick={onClick}>
       Delete Pot
     </Button>
   );
