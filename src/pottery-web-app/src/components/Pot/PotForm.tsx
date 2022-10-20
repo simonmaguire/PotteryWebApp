@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { updatePot, addPot, deletePot } from "../../API";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { validationSchema } from "./FormValidationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -45,7 +45,7 @@ const PotForm: React.FC<IPotFormProps> = ({ potInfo, setIdAfterSave }) => {
   };
 
   return (
-    <div data-testid="pot-form">
+    <div id="form">
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onCreateOrSave)}>
           <GeneralSection />

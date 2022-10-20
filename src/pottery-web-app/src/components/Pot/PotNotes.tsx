@@ -5,13 +5,14 @@ import { getPot } from "../../API";
 import { BLANK_POT } from "../../common/Constants";
 import { initialValuesAsStrings } from "../../common/utility";
 import PotForm from "./PotForm";
+import { Spinner } from "react-bootstrap";
 
 const OBJECTID_LENGTH = 24;
 
 const PotNotes = () => {
   let { id } = useParams();
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoadingForm, setIsLoadingForm] = useState<boolean>(true);
   const [potInfo, setPotInfo] = useState<IPotInfo>({
     ...BLANK_POT,
     _id: id || "",
@@ -23,19 +24,17 @@ const PotNotes = () => {
 
   const loadPot = (): void => {
     //TODO: cleaner catch block
-    console.log(potInfo._id);
-
     if (potInfo._id.length === OBJECTID_LENGTH) {
       try {
         getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
           setPotInfo(initialValuesAsStrings(pot));
-          setIsLoading(false);
+          setIsLoadingForm(false);
         });
       } catch (e) {
         console.log(e);
       }
     } else if (potInfo._id === "new") {
-      setIsLoading(false);
+      setIsLoadingForm(false);
     } else {
       console.log("Wrong Id FORMAT");
     }
@@ -44,9 +43,16 @@ const PotNotes = () => {
 
   return (
     <div>
-      <Container>
-        {isLoading ? (
-          <div>...Loading</div>
+      <Container id="pot-form-container">
+        {isLoadingForm ? (
+          <Spinner
+            id="loading-spinner"
+            animation="border"
+            variant="primary"
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
         ) : (
           <PotForm potInfo={potInfo} setIdAfterSave={setIdAfterSave} />
         )}

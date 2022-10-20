@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Container, Card, Col, Row } from "react-bootstrap";
+import { Form, Container, Col, Row, InputGroup } from "react-bootstrap";
 import { useFormContext, Controller } from "react-hook-form";
 import { dateStringToComponentValue } from "../../common/utility";
+import { ErrorMessage } from "@hookform/error-message";
 
 function ThrowingSection() {
   const {
@@ -28,118 +29,139 @@ function ThrowingSection() {
   // };
 
   return (
-    <Card className="form-section">
-      <Card.Header as="h2" className="section-header">
-        Throwing
-      </Card.Header>
-      <Card.Body>
-        <Container>
-          <Row>
-            <Col>
-              <Form.Group>
-                <Form.Label id="throw-date-label">Date</Form.Label>
-                <Controller
-                  name="throw_date"
-                  control={control}
-                  defaultValue={""}
-                  render={({ field }) => (
+    <div className="form-section">
+      <h3 className="section-header">Throwing</h3>
+      <Container>
+        <Row>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label id="throw-date-label">Date</Form.Label>
+              <Controller
+                name="throw_date"
+                control={control}
+                defaultValue={""}
+                render={({ field }) => (
+                  <Form.Control
+                    {...field}
+                    type="date"
+                    aria-labelledby="throw-date-label"
+                    value={dateStringToComponentValue(field.value)}
+                    onChange={async (
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ) => {
+                      field.onChange(e);
+                      await trigger(["trim_date", "throw_date", "result_date"]);
+                    }}
+                  />
+                )}
+              />
+              <ErrorMessage
+                className="error-text"
+                errors={errors}
+                name="throw_date"
+                as="p"
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label>Clay Weight</Form.Label>
+              <Controller
+                name="clay_weight"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <InputGroup>
                     <Form.Control
                       {...field}
-                      type="date"
-                      aria-labelledby="throw-date-label"
-                      value={dateStringToComponentValue(field.value)}
-                      onChange={async (
-                        e: React.ChangeEvent<HTMLInputElement>
-                      ) => {
-                        field.onChange(e);
-                        await trigger([
-                          "trim_date",
-                          "throw_date",
-                          "result_date",
-                        ]);
-                      }}
+                      type="text"
+                      aria-label="clay-weight"
                     />
-                  )}
-                />
-                <p>{errors.throw_date?.message}</p>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Label>Clay Weight</Form.Label>
-                <Controller
-                  name="clay_weight"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <div>
-                      <Form.Control
-                        {...field}
-                        type="text"
-                        aria-label="clay-weight"
-                      />
-                    </div>
-                  )}
-                />
-                <p>{errors.clay_weight?.message}</p>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Form.Group>
-                <Form.Label>Thrown Height</Form.Label>
-                <Controller
-                  name="throw_height"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
+                    <InputGroup.Text>Oz.</InputGroup.Text>
+                  </InputGroup>
+                )}
+              />
+              <ErrorMessage
+                className="error-text"
+                errors={errors}
+                name="clay_weight"
+                as="p"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label>Thrown Height</Form.Label>
+              <Controller
+                name="throw_height"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <InputGroup>
                     <Form.Control
                       {...field}
                       type="text"
                       aria-label="throw-height"
                     />
-                  )}
-                />
-                <p>{errors.throw_height?.message}</p>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Label>Thrown Width</Form.Label>
-                <Controller
-                  name="throw_width"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
+                    <InputGroup.Text>In.</InputGroup.Text>
+                  </InputGroup>
+                )}
+              />
+              <ErrorMessage
+                className="error-text"
+                errors={errors}
+                name="throw_height"
+                as="p"
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label>Thrown Width</Form.Label>
+              <Controller
+                name="throw_width"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <InputGroup>
                     <Form.Control
                       {...field}
                       type="text"
                       aria-label="throw-width"
                     />
-                  )}
-                />
-                <p>{errors.throw_width?.message}</p>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Form.Group>
-            <Form.Label>Throwing Notes</Form.Label>
-            <Controller
-              name="throw_notes"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <Form.Control
-                  {...field}
-                  as="textarea"
-                  aria-label="throw-notes"
-                />
-              )}
-            />
-            <p>{errors.throw_notes?.message}</p>
-          </Form.Group>
-          {/* <Form.Group>
+                    <InputGroup.Text>In.</InputGroup.Text>
+                  </InputGroup>
+                )}
+              />
+              <ErrorMessage
+                className="error-text"
+                errors={errors}
+                name="throw_width"
+                as="p"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Form.Group className="form-group">
+          <Form.Label>Throwing Notes</Form.Label>
+          <Controller
+            name="throw_notes"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <Form.Control {...field} as="textarea" aria-label="throw-notes" />
+            )}
+          />
+          <ErrorMessage
+            className="error-text"
+            errors={errors}
+            name="throw_notes"
+            as="p"
+          />
+        </Form.Group>
+        {/* <Form.Group className="form-group">
             <Form.Label>Throwing Pictures</Form.Label>
             <div>
               <input
@@ -153,9 +175,8 @@ function ThrowingSection() {
               ))}
             </div>
           </Form.Group> */}
-        </Container>
-      </Card.Body>
-    </Card>
+      </Container>
+    </div>
   );
 }
 

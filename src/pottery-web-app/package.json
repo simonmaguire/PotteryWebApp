@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@hookform/error-message": "^2.0.0",
     "@types/enzyme": "^3.10.12",
     "@types/luxon": "^3.0.1",
     "enzyme": "^3.11.0",

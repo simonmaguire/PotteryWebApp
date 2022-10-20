@@ -16,5 +16,8 @@ export const initialValuesAsStrings = (pot: IPotInfo) => {
     clay_weight: pot.clay_weight || "",
     result_width: pot.result_width || "",
     result_height: pot.result_height || "",
+    result_date: pot.result_date || "",
+    throw_date: pot.throw_date || "",
+    trim_date: pot.trim_date || "",
   };
 };

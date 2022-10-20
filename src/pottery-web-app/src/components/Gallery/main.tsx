@@ -6,6 +6,7 @@ import { getPots, deletePot } from "../../API";
 
 const Main = () => {
   const [pots, setPots] = useState<IPot[]>([]);
+  const [loadingPots, setLoadingPots] = useState(true);
 
   useEffect(() => {
     fetchPots();
@@ -14,6 +15,7 @@ const Main = () => {
   const fetchPots = (): void => {
     getPots().then(({ data: { pots } }: IPotInfo[] | any) => {
       setPots(pots);
+      setLoadingPots(false);
     });
   };
 
@@ -26,7 +28,11 @@ const Main = () => {
   return (
     <Container id="Main">
       <Options></Options>
-      <ListView pots={pots} handleDeletePot={handleDeletePot}></ListView>
+      <ListView
+        pots={pots}
+        handleDeletePot={handleDeletePot}
+        loadingPots={loadingPots}
+      ></ListView>
     </Container>
   );
 };
