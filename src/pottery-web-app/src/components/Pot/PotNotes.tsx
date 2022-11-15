@@ -23,6 +23,7 @@ const PotNotes = () => {
     setPotInfo({ ...potInfo, _id: id });
   };
 
+
   const loadPot = (): void => {
     if (potInfo._id === "new") {
       setIsLoadingForm(false);
