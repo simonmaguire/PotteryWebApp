@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: rgb(10, 10, 10);
+  background-color: rgb(25, 25, 25);
   min-height: 100vh;
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
@@ -109,7 +109,13 @@
   display: flex;
   justify-content: space-evenly;
   padding: 15px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 800px) {
+  .form-content {
+    flex-direction: column;
+  }
 }
 
 .form-content {
@@ -124,6 +130,9 @@
 .form-control:focus {
   background-color: #fcfcfc73;
   color: #000000;
+}
+.form-group input {
+  cursor: text;
 }
 .input-group {
   margin-bottom: 15px;
@@ -213,4 +222,15 @@ option:hover {
   --bs-btn-disabled-bg: #230000;
   --bs-btn-disabled-border-color: #0d060f;
   --bs-btn-color: #beafa5;
+}
+
+.error-page {
+  height: 30vh;
+  margin: 10vh 0vh 10vh 0vh;
+  width: 100%;
+  color: #beafa5;
+  font-size: 36px;
+}
+.error-page a {
+  color: #5a3030;
 }

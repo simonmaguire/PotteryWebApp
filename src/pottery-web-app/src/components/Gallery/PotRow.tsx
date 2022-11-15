@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsTrashFill, BsPencilSquare } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import DeletePopup from "../DeletePopup";
 
 type PotRowProps = {
   pot: IPotInfo;
@@ -9,6 +10,9 @@ type PotRowProps = {
 
 const PotRow: React.FC<PotRowProps> = (props) => {
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div className="pot-row" aria-label="pot-row" role="listitem">
@@ -26,7 +30,7 @@ const PotRow: React.FC<PotRowProps> = (props) => {
           className="pot-action"
           role="img"
           aria-label="delete-icon"
-          onClick={() => props.handleDelete(props.pot._id)}
+          onClick={handleShow}
         />
         <BsPencilSquare
           className="pot-action"
@@ -35,6 +39,14 @@ const PotRow: React.FC<PotRowProps> = (props) => {
           onClick={() => navigate(`/pot/${props.pot._id}`)}
         />
       </div>
+      <DeletePopup
+        show={show}
+        handleClose={handleClose}
+        confirmedAction={() => {
+          props.handleDelete(props.pot._id);
+          handleClose();
+        }}
+      />
     </div>
   );
 };

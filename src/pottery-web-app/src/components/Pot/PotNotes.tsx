@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { getPot } from "../../API";
 import { BLANK_POT } from "../../common/Constants";
@@ -10,6 +10,7 @@ import { Spinner } from "react-bootstrap";
 const OBJECTID_LENGTH = 24;
 
 const PotNotes = () => {
+  const navigate = useNavigate();
   let { id } = useParams();
 
   const [isLoadingForm, setIsLoadingForm] = useState<boolean>(true);
@@ -23,21 +24,22 @@ const PotNotes = () => {
   };
 
   const loadPot = (): void => {
-    //TODO: cleaner catch block
-    if (potInfo._id.length === OBJECTID_LENGTH) {
-      try {
-        getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
-          setPotInfo(initialValuesAsStrings(pot));
-          setIsLoadingForm(false);
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    } else if (potInfo._id === "new") {
+    if (potInfo._id === "new") {
       setIsLoadingForm(false);
-    } else {
-      console.log("Wrong Id FORMAT");
+      return;
     }
+    if (potInfo._id.length !== OBJECTID_LENGTH) {
+      navigate("notfound", { state: { message: "Invalid Pot ID" } });
+      return;
+    }
+    getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
+      if (!pot) {
+        navigate("notfound", { state: { message: "Pot Not Found" } });
+        return;
+      }
+      setPotInfo(initialValuesAsStrings(pot));
+      setIsLoadingForm(false);
+    });
   };
   useEffect(loadPot, []);
 
