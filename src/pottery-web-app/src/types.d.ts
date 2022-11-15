@@ -44,7 +44,4 @@ interface IPotInfo {
 interface SectionProps {
   potInfo: IPotInfo;
   // updateDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleChange: (
-    event: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
-  ) => void;
 }

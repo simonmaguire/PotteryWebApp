@@ -1,35 +1,36 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
 import PotRow from "./PotRow";
+import GalleryHeader from "./GalleryHeader";
+import { Spinner } from "react-bootstrap";
 
 type ListViewProps = {
   pots: IPot[];
+  loadingPots: boolean;
   handleDeletePot: (id: string) => void;
 };
 
 const ListView: React.FC<ListViewProps> = (props) => {
   return (
-    <div className="pottery-view">
-      <Table striped bordered id="pottery-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Stage</th>
-            <th>Clay</th>
-            <th>Category</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.pots.map((pot, y) => (
-            <PotRow
-              key={y}
-              pot={pot}
-              handleDelete={props.handleDeletePot}
-            ></PotRow>
-          ))}
-        </tbody>
-      </Table>
+    <div className="pottery-view" role="list">
+      <GalleryHeader />
+      {!props.loadingPots ? (
+        props.pots.map((pot, y) => (
+          <PotRow
+            key={y}
+            pot={pot}
+            handleDelete={props.handleDeletePot}
+          ></PotRow>
+        ))
+      ) : (
+        <Spinner
+          id="loading-spinner"
+          animation="border"
+          variant="primary"
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
     </div>
   );
 };

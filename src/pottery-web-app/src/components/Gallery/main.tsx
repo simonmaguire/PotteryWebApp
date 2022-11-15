@@ -1,11 +1,12 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 import ListView from "./ListView";
 import Options from "./options";
 import { getPots, deletePot } from "../../API";
 
-const Main: React.FC = () => {
+const Main = () => {
   const [pots, setPots] = useState<IPot[]>([]);
+  const [loadingPots, setLoadingPots] = useState(true);
 
   useEffect(() => {
     fetchPots();
@@ -14,6 +15,7 @@ const Main: React.FC = () => {
   const fetchPots = (): void => {
     getPots().then(({ data: { pots } }: IPotInfo[] | any) => {
       setPots(pots);
+      setLoadingPots(false);
     });
   };
 
@@ -24,10 +26,14 @@ const Main: React.FC = () => {
   };
 
   return (
-    <div id="Main">
+    <Container id="Main">
       <Options></Options>
-      <ListView pots={pots} handleDeletePot={handleDeletePot}></ListView>
-    </div>
+      <ListView
+        pots={pots}
+        handleDeletePot={handleDeletePot}
+        loadingPots={loadingPots}
+      ></ListView>
+    </Container>
   );
 };
 

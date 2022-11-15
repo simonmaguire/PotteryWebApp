@@ -3,7 +3,8 @@ import { act } from "react-test-renderer";
 import {
   CancelFormButton,
   CreateFormButton,
-  EditFormButtonGroup,
+  SaveFormButton,
+  DeleteFormButton,
 } from "../components/Pot/FormButtons";
 
 describe("Pot Button tests", () => {
@@ -69,60 +70,63 @@ describe("Pot Button tests", () => {
     });
   });
 
-  describe("Edit Button Group", () => {
-    it("Edit Button Group Renders", () => {
-      const DELETE_CLICK_HANDLER = jest.fn();
+  describe("Save Button", () => {
+    it("Save Button Render", () => {
       const SAVE_CLICK_HANDLER = jest.fn();
 
       render(
-        <EditFormButtonGroup
-          onSaveClick={SAVE_CLICK_HANDLER}
-          onDeleteClick={DELETE_CLICK_HANDLER}
-          saveDisabled={false}
-        ></EditFormButtonGroup>
+        <SaveFormButton onSaveClick={SAVE_CLICK_HANDLER} saveDisabled={false} />
       );
       const saveButton = screen.getByText("Save");
-      const deleteButton = screen.getByText("Delete Pot");
       expect(saveButton).toBeInTheDocument();
-      expect(deleteButton).toBeInTheDocument();
     });
 
     it("Edit Button Group onClicks", () => {
-      const DELETE_CLICK_HANDLER = jest.fn();
       const SAVE_CLICK_HANDLER = jest.fn();
+
       render(
-        <EditFormButtonGroup
-          onSaveClick={SAVE_CLICK_HANDLER}
-          onDeleteClick={DELETE_CLICK_HANDLER}
-          saveDisabled={false}
-        ></EditFormButtonGroup>
+        <SaveFormButton onSaveClick={SAVE_CLICK_HANDLER} saveDisabled={false} />
       );
       const saveButton = screen.getByText("Save");
-      const deleteButton = screen.getByText("Delete Pot");
 
       act(() => {
         saveButton.click();
-        deleteButton.click();
       });
       expect(SAVE_CLICK_HANDLER).toHaveBeenCalled();
-      expect(DELETE_CLICK_HANDLER).toHaveBeenCalled();
     });
 
     it("Edit Button Group onClicks, save disabled", () => {
-      const DELETE_CLICK_HANDLER = jest.fn();
       const SAVE_CLICK_HANDLER = jest.fn();
+
       render(
-        <EditFormButtonGroup
-          onSaveClick={SAVE_CLICK_HANDLER}
-          onDeleteClick={DELETE_CLICK_HANDLER}
-          saveDisabled={true}
-        ></EditFormButtonGroup>
+        <SaveFormButton onSaveClick={SAVE_CLICK_HANDLER} saveDisabled={true} />
       );
       const saveButton = screen.getByText("Save");
       act(() => {
         saveButton.click();
       });
       expect(SAVE_CLICK_HANDLER).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe("Delete Button", () => {
+    it("Delete Button Renders", () => {
+      const DELETE_CLICK_HANDLER = jest.fn();
+
+      render(<DeleteFormButton onDeleteClick={DELETE_CLICK_HANDLER} />);
+      const deleteButton = screen.getByText("Delete Pot");
+      expect(deleteButton).toBeInTheDocument();
+    });
+
+    it("Delete onClicks", () => {
+      const DELETE_CLICK_HANDLER = jest.fn();
+      render(<DeleteFormButton onDeleteClick={DELETE_CLICK_HANDLER} />);
+      const deleteButton = screen.getByText("Delete Pot");
+
+      act(() => {
+        deleteButton.click();
+      });
+      expect(DELETE_CLICK_HANDLER).toHaveBeenCalled();
     });
   });
 });

@@ -1,12 +1,11 @@
-import React from "react";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 
-const Options: React.FC = () => {
+const Options = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div id="gallery-options">
       <Button onClick={() => navigate("/pot/new")}>Add Pot</Button>
     </div>
   );
