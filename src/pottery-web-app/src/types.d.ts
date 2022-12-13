@@ -1,3 +1,9 @@
+interface IUser {
+  name: String;
+  email: String;
+  password: string;
+}
+
 interface IPot {
   _id: string;
   name: string;

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 const baseUrl: string = "http://localhost:3001";
 
+//POC for tests?? Still need?
 const potteryApi = {
   getPots: async (): Promise<AxiosResponse<ApiDataType>> => {
     try {
@@ -14,6 +15,21 @@ const potteryApi = {
     }
   },
 };
+
+export const register = async (
+  formData: IUser
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const registrationMsg: AxiosResponse<ApiDataType> = await axios.post(
+      `${baseUrl}/register`,
+      formData
+    );
+    return registrationMsg;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getPots = async (): Promise<AxiosResponse<ApiDataType>> => {
   try {
     const pots: AxiosResponse<ApiDataType> = await axios.get(baseUrl + "/pots");

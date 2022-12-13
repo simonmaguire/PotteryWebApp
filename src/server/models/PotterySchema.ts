@@ -79,4 +79,4 @@ const PotterySchema: Schema = new Schema(
   { collection: "Pots" }
 );
 
-export default model<IPot>("pottery", PotterySchema);
+export default model<IPot>("pot", PotterySchema);

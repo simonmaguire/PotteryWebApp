@@ -1,6 +1,3 @@
-const express = require("express");
-const router = express.Router();
-
 import {
   getAllPots,
   createPot,
@@ -8,6 +5,9 @@ import {
   deletePot,
   updatePot,
 } from "../controllers/PotteryController";
+
+const express = require("express");
+const router = express.Router();
 
 router.get("/pots", getAllPots);
 router.get("/pot/:id", getPot);

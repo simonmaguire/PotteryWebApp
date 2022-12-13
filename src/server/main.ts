@@ -1,11 +1,12 @@
 import { Express, NextFunction, Request, Response } from "express";
 import * as express from "express";
-import * as path from "path";
 
 const connectDB = require("./config/db");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app: Express = express();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
@@ -31,6 +32,8 @@ connectDB();
 
 //routes
 const potteryRoutes = require("./routes/PotteryRoutes");
+const userRoutes = require("./routes/UserRoutes");
+app.use(userRoutes);
 app.use(potteryRoutes);
 
 const port = process.env.PORT || 3001;
