@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { register, isUserAuth } from "../../API";
-
+import { isUserAuth, login } from "../../API";
 import { Form, Col } from "react-bootstrap";
 import { Controller } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
+import { useNavigate } from "react-router";
 
-const Signup = () => {
+const Login = () => {
   const navigate = useNavigate();
   const methods = useForm<IUser>({
     mode: "onChange",
@@ -15,8 +14,8 @@ const Signup = () => {
   });
 
   const [msg, setMSG] = useState("");
-  const registerUser = (data: IUser) => {
-    register(data).then((regInfo) => console.log(regInfo));
+  const loginUser = (data: IUser) => {
+    login(data).then((res) => localStorage.setItem("token", res.data.token));
   };
 
   useEffect(() => {
@@ -24,9 +23,9 @@ const Signup = () => {
   }, []);
 
   return (
-    <div id="singup-form">
+    <div id="login-form">
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(registerUser)}>
+        <form onSubmit={methods.handleSubmit(loginUser)}>
           <Col>
             <Form.Group className="form-group">
               <Form.Label>User Name</Form.Label>
@@ -35,16 +34,6 @@ const Signup = () => {
                 defaultValue=""
                 render={({ field }) => (
                   <Form.Control {...field} type="text" aria-label="username" />
-                )}
-              />
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label>Email</Form.Label>
-              <Controller
-                name="email"
-                defaultValue=""
-                render={({ field }) => (
-                  <Form.Control {...field} type="text" aria-label="email" />
                 )}
               />
             </Form.Group>
@@ -67,6 +56,6 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
 //
 //

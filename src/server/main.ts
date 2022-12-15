@@ -5,8 +5,6 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const app: Express = express();
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());

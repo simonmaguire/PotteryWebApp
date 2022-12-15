@@ -25,6 +25,19 @@ type ApiDataType = {
   pot?: IPotInfo;
 };
 
+type ApiLogginResponseType = {
+  message: string;
+  status: string;
+  token: string;
+};
+
+type ApiUserAuthType = {
+  message: string;
+  status: string;
+  isLoggedIn: boolean;
+  username: string;
+};
+
 interface IPotInfo {
   _id: string;
   stage?: string;
