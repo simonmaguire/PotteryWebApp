@@ -3,10 +3,14 @@ import { IPot } from "./../types/pot";
 import { isValidObjectId } from "mongoose";
 import PotterySchema from "../models/PotterySchema";
 
-const getAllPots = async (req: Request, res: Response): Promise<void> => {
+const getPots = async (req: Request, res: Response): Promise<void> => {
   try {
-    const pots: IPot[] = await PotterySchema.find();
-    res.status(200).json({ pots });
+    if (isValidObjectId(req.params.userId)) {
+      const pots: IPot[] = await PotterySchema.find({
+        userId: req.params.userId,
+      });
+      res.status(200).json({ pots });
+    }
   } catch (error) {
     throw error;
   }
@@ -35,6 +39,7 @@ const createPot = async (req: Request, res: Response): Promise<void> => {
       | "throw_date"
       | "trim_date"
       | "result_date"
+      | "userId"
     >;
 
     const pot: IPot = new PotterySchema({
@@ -56,6 +61,7 @@ const createPot = async (req: Request, res: Response): Promise<void> => {
       throw_date: body.throw_date,
       trim_date: body.trim_date,
       result_date: body.result_date,
+      userId: body.userId,
     });
 
     const newPot: IPot = await pot.save();
@@ -113,4 +119,4 @@ const deletePot = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAllPots, createPot, getPot, updatePot, deletePot };
+export { getPots, createPot, getPot, updatePot, deletePot };

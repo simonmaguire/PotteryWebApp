@@ -36,7 +36,7 @@ const login = async (req: Request, res: Response) => {
     UserSchema.findOne({ username: userLoggingIn.username }).then((dbUser) => {
       if (!dbUser) {
         return res.json({
-          message: "Invalid Username or Password",
+          message: "Invalid Username",
         });
       }
       bcrypt
@@ -56,6 +56,7 @@ const login = async (req: Request, res: Response) => {
                 return res.json({
                   message: "Success",
                   token: "Bearer " + token,
+                  userId: dbUser._id,
                 });
               }
             );
@@ -81,7 +82,6 @@ const flattenTokenString = (headerToken: string[]) => {
 };
 
 const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
-  // removes 'Bearer` from token
   let accessToken = req.headers["x-access-token"];
 
   while (Array.isArray(accessToken)) {

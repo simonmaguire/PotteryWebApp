@@ -1,5 +1,5 @@
 import {
-  getAllPots,
+  getPots,
   createPot,
   getPot,
   deletePot,
@@ -9,7 +9,7 @@ import {
 const express = require("express");
 const router = express.Router();
 
-router.get("/pots", getAllPots);
+router.get("/pots/user/:userId", getPots);
 router.get("/pot/:id", getPot);
 router.post("/create-pot", createPot);
 router.put("/update-pot/:id", updatePot);

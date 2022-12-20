@@ -29,6 +29,7 @@ type ApiLogginResponseType = {
   message: string;
   status: string;
   token: string;
+  userId: string;
 };
 
 type ApiUserAuthType = {
@@ -36,6 +37,7 @@ type ApiUserAuthType = {
   status: string;
   isLoggedIn: boolean;
   username: string;
+  userId: string;
 };
 
 interface IPotInfo {

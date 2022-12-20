@@ -60,9 +60,13 @@ export const isUserAuth = async (): Promise<AxiosResponse<ApiUserAuthType>> => {
   }
 };
 
-export const getPots = async (): Promise<AxiosResponse<ApiDataType>> => {
+export const getPots = async (
+  userId: string | null
+): Promise<AxiosResponse<ApiDataType>> => {
   try {
-    const pots: AxiosResponse<ApiDataType> = await axios.get(baseUrl + "/pots");
+    const pots: AxiosResponse<ApiDataType> = await axios.get(
+      baseUrl + `/pots/user/${userId}`
+    );
     return pots;
   } catch (error) {
     throw error;
@@ -108,7 +112,7 @@ export const addPot = async (
     };
     const savePot: AxiosResponse<ApiDataType> = await axios.post(
       baseUrl + "/create-pot",
-      pot
+      { ...pot, userId: localStorage.getItem("userId") }
     );
     return savePot;
   } catch (error) {

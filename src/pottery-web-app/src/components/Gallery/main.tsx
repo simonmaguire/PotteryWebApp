@@ -13,10 +13,13 @@ const Main = () => {
   }, []);
 
   const fetchPots = (): void => {
-    getPots().then(({ data: { pots } }: IPotInfo[] | any) => {
-      setPots(pots);
-      setLoadingPots(false);
-    });
+    console.log(localStorage.getItem("userId"));
+    getPots(localStorage.getItem("userId")).then(
+      ({ data: { pots } }: IPotInfo[] | any) => {
+        setPots(pots);
+        setLoadingPots(false);
+      }
+    );
   };
 
   const handleDeletePot = (_id: string): void => {

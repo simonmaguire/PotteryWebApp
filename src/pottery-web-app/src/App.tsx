@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NotFound, Page404 } from "./ErrorPages";
 import Signup from "./components/Login/Signup";
 import Login from "./components/Login/Login";
+import { Home } from "./home";
 
 import "./App.css";
 
@@ -15,7 +16,8 @@ function App() {
       <Router>
         <Banner></Banner>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<Main />} />
           <Route path="/pot/:id" element={<PotNotes />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

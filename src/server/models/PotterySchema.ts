@@ -75,6 +75,10 @@ const PotterySchema: Schema = new Schema(
       type: Date,
       required: false,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
   },
   { collection: "Pots" }
 );

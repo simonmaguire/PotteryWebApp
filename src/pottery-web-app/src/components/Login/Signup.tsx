@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { registerValidationSchema } from "./UserValidationSchemas";
 import { register, isUserAuth } from "../../API";
-
 import { Form, Col } from "react-bootstrap";
 import { Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 const Signup = () => {
   const navigate = useNavigate();
   const methods = useForm<IUser>({
     mode: "onChange",
-    // resolver: yupResolver(Create New Yup Schema)
+    resolver: yupResolver(registerValidationSchema),
   });
 
   const [msg, setMSG] = useState("");
   const registerUser = (data: IUser) => {
-    register(data).then((regInfo) => console.log(regInfo));
+    register(data).then((regInfo) => setMSG(regInfo.data.message));
   };
 
   useEffect(() => {
@@ -37,6 +38,12 @@ const Signup = () => {
                   <Form.Control {...field} type="text" aria-label="username" />
                 )}
               />
+              <ErrorMessage
+                className="error-text"
+                errors={methods.formState.errors}
+                name="username"
+                as="p"
+              />
             </Form.Group>
             <Form.Group className="form-group">
               <Form.Label>Email</Form.Label>
@@ -47,6 +54,12 @@ const Signup = () => {
                   <Form.Control {...field} type="text" aria-label="email" />
                 )}
               />
+              <ErrorMessage
+                className="error-text"
+                errors={methods.formState.errors}
+                name="email"
+                as="p"
+              />
             </Form.Group>
             <Form.Group className="form-group">
               <Form.Label>Password</Form.Label>
@@ -56,6 +69,12 @@ const Signup = () => {
                 render={({ field }) => (
                   <Form.Control {...field} type="text" aria-label="password" />
                 )}
+              />
+              <ErrorMessage
+                className="error-text"
+                errors={methods.formState.errors}
+                name="password"
+                as="p"
               />
             </Form.Group>
           </Col>
