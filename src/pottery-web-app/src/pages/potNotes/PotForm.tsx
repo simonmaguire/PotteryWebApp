@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { validationSchema } from "./FormValidationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import GeneralSection from "./GeneralSection";
-import ThrowingSection from "./ThrowingSection";
-import TrimmingSection from "./TrimmingSection";
-import GlazingSection from "./GlazingSection";
-import ResultSection from "./ResultSection";
-import ButtonBar from "./ButtonBar";
+import GeneralSection from "./parts/formSections/GeneralSection";
+import ThrowingSection from "./parts/formSections/ThrowingSection";
+import TrimmingSection from "./parts/formSections/TrimmingSection";
+import GlazingSection from "./parts/formSections/GlazingSection";
+import ResultSection from "./parts/formSections/ResultSection";
+import ButtonBar from "./parts/ButtonBar";
 
 interface IPotFormProps {
   potInfo: IPotInfo;
@@ -38,7 +38,7 @@ const PotForm: React.FC<IPotFormProps> = ({ potInfo, setIdAfterSave }) => {
     } else {
       addPot(data).then(({ data: { pot } }: IPotInfo | any) => {
         setIdAfterSave(pot._id);
-        navigate(`/pot/${pot._id}`);
+        navigate(`/pottery/${pot._id}`);
         setLoading(false);
       });
     }
@@ -57,7 +57,7 @@ const PotForm: React.FC<IPotFormProps> = ({ potInfo, setIdAfterSave }) => {
             potId={potInfo._id}
             handleDeletePot={handleDeletePot}
             handleCancel={() => {
-              navigate("/");
+              navigate("/pottery");
             }}
             formIsValid={methods.formState.isValid}
             loading={loading}

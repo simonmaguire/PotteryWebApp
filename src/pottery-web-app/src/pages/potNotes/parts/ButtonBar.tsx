@@ -5,7 +5,7 @@ import {
   SaveFormButton,
   DeleteFormButton,
 } from "./FormButtons";
-import DeletePopup from "../DeletePopup";
+import DeletePopup from "../../pottery/DeletePopup";
 
 interface ButtonBarProps {
   potId: string;

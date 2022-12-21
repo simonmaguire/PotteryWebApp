@@ -5,7 +5,7 @@ import {
   CreateFormButton,
   SaveFormButton,
   DeleteFormButton,
-} from "../components/Pot/FormButtons";
+} from "../components/Pottery/FormButtons";
 
 describe("Pot Button tests", () => {
   describe("Cancel Button", () => {

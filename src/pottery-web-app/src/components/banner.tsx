@@ -23,7 +23,9 @@ const Banner = () => {
           <button
             onClick={() => {
               localStorage.removeItem("token");
+              localStorage.removeItem("userId");
               setUsername(null);
+              navigate("/");
             }}
           >
             Logout

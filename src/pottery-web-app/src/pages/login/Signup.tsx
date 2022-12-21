@@ -21,7 +21,9 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    isUserAuth().then((res) => (res.data.isLoggedIn ? navigate("/") : null));
+    isUserAuth().then((res) =>
+      res.data.isLoggedIn ? navigate("/pottery") : null
+    );
   }, []);
 
   return (

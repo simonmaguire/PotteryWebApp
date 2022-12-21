@@ -1,14 +1,14 @@
 import React from "react";
-import Main from "./components/Gallery/main";
-import PotNotes from "./components/Pot/PotNotes";
+import Main from "./pages/pottery/main";
+import PotNotes from "./pages/potNotes/PotContainer";
 import Banner from "./components/banner";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { NotFound, Page404 } from "./ErrorPages";
-import Signup from "./components/Login/Signup";
-import Login from "./components/Login/Login";
-import { Home } from "./home";
+import { NotFound, Page404 } from "./pages/ErrorPages";
+import Signup from "./pages/login/Signup";
+import Login from "./pages/login/Login";
+import { Home } from "./pages/home/home";
 
-import "./App.css";
+import "./css/App.css";
 
 function App() {
   return (
@@ -17,11 +17,10 @@ function App() {
         <Banner></Banner>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/gallery" element={<Main />} />
-          <Route path="/pot/:id" element={<PotNotes />} />
+          <Route path="/pottery" element={<Main />} />
+          <Route path="/pottery/:id" element={<PotNotes />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          {/* <Route  path='/user/:userId' element={<UserProfile/>} /> */}
           <Route path="pot/:id/notfound" element={<NotFound />} />
           <Route path="*" element={<Page404 />} />
         </Routes>

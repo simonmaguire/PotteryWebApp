@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { getPot } from "../../API";
-import { BLANK_POT } from "../../common/Constants";
-import { initialValuesAsStrings } from "../../common/utility";
+import { BLANK_POT } from "./utility/Constants";
+import { initialValuesAsStrings } from "./utility/utilityFunctions";
 import PotForm from "./PotForm";
 import { Spinner } from "react-bootstrap";
 
@@ -22,7 +22,6 @@ const PotNotes = () => {
   const setIdAfterSave = (id: string) => {
     setPotInfo({ ...potInfo, _id: id });
   };
-
 
   const loadPot = (): void => {
     if (potInfo._id === "new") {

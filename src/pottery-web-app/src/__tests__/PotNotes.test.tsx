@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { act } from "react-test-renderer";
-import PotNotes from "../components/Pot/PotNotes";
+import PotNotes from "../pages/potNotes/PotContainer";
 import Main from "../components/Gallery/main";
 import {
   BrowserRouter as Router,

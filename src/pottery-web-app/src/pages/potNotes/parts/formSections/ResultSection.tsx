@@ -1,6 +1,6 @@
 import { Form, Container, Row, Col, InputGroup } from "react-bootstrap";
 import { useFormContext, Controller } from "react-hook-form";
-import { dateStringToComponentValue } from "../../common/utility";
+import { dateStringToComponentValue } from "../../utility/utilityFunctions";
 import { ErrorMessage } from "@hookform/error-message";
 
 function ResultSection() {
