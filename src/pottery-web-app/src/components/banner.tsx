@@ -4,34 +4,23 @@ import { isUserAuth } from "../API";
 
 const Banner = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState<String | null>(null);
-  useEffect(() => {
-    console.log("check user");
-    isUserAuth().then((res) => {
-      setUsername(res.data.isLoggedIn ? res.data.username : null);
-    });
-  }, []);
 
   return (
     <div id="banner">
       <h1 onClick={() => navigate("/")}>Kiln Yard</h1>
       <div>
-        <h3>
-          hello <strong>{username}</strong>
-        </h3>
-        {username && (
+        {localStorage.getItem("token") && (
           <button
             onClick={() => {
               localStorage.removeItem("token");
               localStorage.removeItem("userId");
-              setUsername(null);
               navigate("/");
             }}
           >
             Logout
           </button>
         )}
-        {!username && (
+        {!localStorage.getItem("token") && (
           <div>
             <button
               onClick={() => {

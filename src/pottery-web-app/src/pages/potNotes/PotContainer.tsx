@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { getPot } from "../../API";
@@ -32,6 +32,7 @@ const PotNotes = () => {
       navigate("notfound", { state: { message: "Invalid Pot ID" } });
       return;
     }
+
     getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
       if (!pot) {
         navigate("notfound", { state: { message: "Pot Not Found" } });

@@ -1,9 +1,8 @@
+import { Request, Response } from "express";
 import { registerUser, login, verifyJWT } from "../controllers/UserController";
 
 const express = require("express");
 const router = express.Router();
-
-import { Request, Response } from "express";
 
 router.post("/register", registerUser);
 router.post("/login", login);

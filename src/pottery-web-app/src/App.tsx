@@ -1,4 +1,3 @@
-import React from "react";
 import Main from "./pages/pottery/main";
 import PotNotes from "./pages/potNotes/PotContainer";
 import Banner from "./components/banner";
@@ -7,7 +6,6 @@ import { NotFound, Page404 } from "./pages/ErrorPages";
 import Signup from "./pages/login/Signup";
 import Login from "./pages/login/Login";
 import { Home } from "./pages/home/home";
-
 import "./css/App.css";
 
 function App() {
