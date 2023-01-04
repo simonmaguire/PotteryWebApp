@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { getPot } from "../../API";
-import { BLANK_POT } from "../../common/Constants";
-import { initialValuesAsStrings } from "../../common/utility";
+import { BLANK_POT } from "./utility/Constants";
+import { initialValuesAsStrings } from "./utility/utilityFunctions";
 import PotForm from "./PotForm";
 import { Spinner } from "react-bootstrap";
 
@@ -23,7 +23,6 @@ const PotNotes = () => {
     setPotInfo({ ...potInfo, _id: id });
   };
 
-
   const loadPot = (): void => {
     if (potInfo._id === "new") {
       setIsLoadingForm(false);
@@ -33,6 +32,7 @@ const PotNotes = () => {
       navigate("notfound", { state: { message: "Invalid Pot ID" } });
       return;
     }
+
     getPot(potInfo._id).then(({ data: { pot } }: IPotInfo | any) => {
       if (!pot) {
         navigate("notfound", { state: { message: "Pot Not Found" } });

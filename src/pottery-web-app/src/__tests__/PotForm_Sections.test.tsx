@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { BLANK_POT } from "../common/Constants";
 import { useForm, FormProvider } from "react-hook-form";
-import GeneralSection from "../components/Pot/GeneralSection";
-import ThrowingSection from "../components/Pot/ThrowingSection";
-import TrimmingSection from "../components/Pot/TrimmingSection";
-import GlazingSection from "../components/Pot/GlazingSection";
-import ResultSection from "../components/Pot/ResultSection";
+import GeneralSection from "../components/Pottery/GeneralSection";
+import ThrowingSection from "../components/Pottery/ThrowingSection";
+import TrimmingSection from "../pages/potNotes/TrimmingSection";
+import GlazingSection from "../components/Pottery/GlazingSection";
+import ResultSection from "../components/Pottery/ResultSection";
 
 const Wrapper = (props: any) => {
   const formMethods = useForm<IPotInfo>();

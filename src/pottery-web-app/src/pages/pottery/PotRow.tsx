@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsTrashFill, BsPencilSquare } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import DeletePopup from "../DeletePopup";
+import DeletePopup from "../../pages/pottery/DeletePopup";
 
 type PotRowProps = {
   pot: IPotInfo;
@@ -18,7 +18,7 @@ const PotRow: React.FC<PotRowProps> = (props) => {
     <div className="pot-row" aria-label="pot-row" role="listitem">
       <div
         id="pot-row-attributes"
-        onClick={() => navigate(`/pot/${props.pot._id}`)}
+        onClick={() => navigate(`/pottery/${props.pot._id}`)}
       >
         <p>{props.pot.name}</p>
         <p>{props.pot.category}</p>
@@ -36,7 +36,7 @@ const PotRow: React.FC<PotRowProps> = (props) => {
           className="pot-action"
           role="img"
           aria-label="edit-icon"
-          onClick={() => navigate(`/pot/${props.pot._id}`)}
+          onClick={() => navigate(`/pottery/${props.pot._id}`)}
         />
       </div>
       <DeletePopup

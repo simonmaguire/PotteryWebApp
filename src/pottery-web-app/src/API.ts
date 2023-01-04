@@ -2,21 +2,71 @@ import axios, { AxiosResponse } from "axios";
 
 const baseUrl: string = "http://localhost:3001";
 
-const potteryApi = {
-  getPots: async (): Promise<AxiosResponse<ApiDataType>> => {
-    try {
-      const pots: AxiosResponse<ApiDataType> = await axios.get(
-        baseUrl + "/pots"
-      );
-      return pots;
-    } catch (error) {
-      throw error;
-    }
-  },
-};
-export const getPots = async (): Promise<AxiosResponse<ApiDataType>> => {
+//POC for tests?? Still need?
+// const potteryApi = {
+//   getPots: async (): Promise<AxiosResponse<ApiDataType>> => {
+//     try {
+//       const pots: AxiosResponse<ApiDataType> = await axios.get(
+//         baseUrl + "/pots"
+//       );
+//       return pots;
+//     } catch (error) {
+//       throw error;
+//     }
+//   },
+// };
+
+export const login = async (
+  formData: IUser
+): Promise<AxiosResponse<ApiLogginResponseType>> => {
   try {
-    const pots: AxiosResponse<ApiDataType> = await axios.get(baseUrl + "/pots");
+    const loginMsg: AxiosResponse<ApiLogginResponseType> = await axios.post(
+      `${baseUrl}/login`,
+      formData
+    );
+    return loginMsg;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const register = async (
+  formData: IUser
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const registrationMsg: AxiosResponse<ApiDataType> = await axios.post(
+      `${baseUrl}/register`,
+      formData
+    );
+    return registrationMsg;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const isUserAuth = async (): Promise<AxiosResponse<ApiUserAuthType>> => {
+  try {
+    const registrationMsg: AxiosResponse<ApiUserAuthType> = await axios.get(
+      `${baseUrl}/isUserAuth`,
+      {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    return registrationMsg;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getPots = async (
+  userId: string | null
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const pots: AxiosResponse<ApiDataType> = await axios.get(
+      baseUrl + `/pots/user/${userId}`
+    );
     return pots;
   } catch (error) {
     throw error;
@@ -62,7 +112,7 @@ export const addPot = async (
     };
     const savePot: AxiosResponse<ApiDataType> = await axios.post(
       baseUrl + "/create-pot",
-      pot
+      { ...pot, userId: localStorage.getItem("userId") }
     );
     return savePot;
   } catch (error) {
@@ -97,4 +147,4 @@ export const deletePot = async (
   }
 };
 
-export default potteryApi;
+// export default potteryApi;

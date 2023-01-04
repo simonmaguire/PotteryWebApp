@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import PotForm from "../components/Pot/PotForm";
+import PotForm from "../components/Pottery/PotForm";
 import { BLANK_POT } from "../common/Constants";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

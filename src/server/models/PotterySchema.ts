@@ -75,8 +75,12 @@ const PotterySchema: Schema = new Schema(
       type: Date,
       required: false,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
   },
   { collection: "Pots" }
 );
 
-export default model<IPot>("pottery", PotterySchema);
+export default model<IPot>("pot", PotterySchema);

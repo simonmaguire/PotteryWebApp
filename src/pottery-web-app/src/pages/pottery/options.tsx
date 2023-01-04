@@ -6,7 +6,7 @@ const Options = () => {
 
   return (
     <div id="gallery-options">
-      <Button onClick={() => navigate("/pot/new")}>Add Pot</Button>
+      <Button onClick={() => navigate("/pottery/new")}>Add Pot</Button>
     </div>
   );
 };

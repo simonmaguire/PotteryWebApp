@@ -19,4 +19,5 @@ export interface IPot extends Document {
   throw_date?: Date;
   trim_date?: Date;
   result_date?: Date;
+  userId: String;
 }

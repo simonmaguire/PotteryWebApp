@@ -1,3 +1,9 @@
+interface IUser {
+  name: String;
+  email: String;
+  password: string;
+}
+
 interface IPot {
   _id: string;
   name: string;
@@ -17,6 +23,21 @@ type ApiDataType = {
   status: string;
   pots: IPot[];
   pot?: IPotInfo;
+};
+
+type ApiLogginResponseType = {
+  message: string;
+  status: string;
+  token: string;
+  userId: string;
+};
+
+type ApiUserAuthType = {
+  message: string;
+  status: string;
+  isLoggedIn: boolean;
+  username: string;
+  userId: string;
 };
 
 interface IPotInfo {

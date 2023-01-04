@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Container, Col, Row, InputGroup } from "react-bootstrap";
 import { useFormContext, Controller } from "react-hook-form";
-import { dateStringToComponentValue } from "../../common/utility";
+import { dateStringToComponentValue } from "../../utility/utilityFunctions";
 import { ErrorMessage } from "@hookform/error-message";
 
 function ThrowingSection() {
