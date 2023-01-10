@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import ListView from "./ListView";
+import PotteryCardGrid from "./PotteryCardGrid";
+
 import Options from "./options";
 import { getPots, deletePot } from "../../API";
 
@@ -29,12 +31,12 @@ const Main = () => {
 
   return (
     <Container id="Main">
-      <Options></Options>
-      <ListView
+      <PotteryCardGrid
         pots={pots}
         handleDeletePot={handleDeletePot}
         loadingPots={loadingPots}
-      ></ListView>
+      ></PotteryCardGrid>
+      <Options></Options>
     </Container>
   );
 };
