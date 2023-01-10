@@ -1,13 +1,23 @@
-import Button from "react-bootstrap/Button";
+import { BsPlusCircle } from "react-icons/bs";
+import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
 
 const Options = () => {
   const navigate = useNavigate();
 
   return (
-    <div id="gallery-options">
-      <Button onClick={() => navigate("/pottery/new")}>Add Pot</Button>
-    </div>
+    <IconContext.Provider value={{ size: "2em" }}>
+      <div id="gallery-options">
+        <BsPlusCircle
+          id="create-pot-icon"
+          role="img"
+          aria-label="create-pot-icon"
+          alt-text="aaa"
+          onClick={() => navigate("/pottery/new")}
+        ></BsPlusCircle>
+        {/* <Button onClick={() => navigate("/pottery/new")}>Add Pot</Button> */}
+      </div>
+    </IconContext.Provider>
   );
 };
 

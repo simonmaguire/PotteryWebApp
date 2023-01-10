@@ -8,7 +8,7 @@ const Banner = () => {
   return (
     <div id="banner">
       <h1 onClick={() => navigate("/")}>Kiln Yard</h1>
-      <div>
+      <div className="auth-buttons">
         {localStorage.getItem("token") && (
           <button
             onClick={() => {

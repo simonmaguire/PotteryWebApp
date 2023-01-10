@@ -1,25 +1,23 @@
 import React from "react";
-import PotRow from "./PotRow";
-import GalleryHeader from "./GalleryHeader";
+import PotCard from "./PotCard";
 import { Spinner } from "react-bootstrap";
 
-type ListViewProps = {
+type PotteryCardGridProps = {
   pots: IPot[];
   loadingPots: boolean;
   handleDeletePot: (id: string) => void;
 };
 
-const ListView: React.FC<ListViewProps> = (props) => {
+const PotteryCardGrid: React.FC<PotteryCardGridProps> = (props) => {
   return (
-    <div className="pottery-view" role="list">
-      <GalleryHeader />
+    <div className="pottery-grid-view">
       {!props.loadingPots ? (
         props.pots.map((pot, y) => (
-          <PotRow
+          <PotCard
             key={y}
             pot={pot}
             handleDelete={props.handleDeletePot}
-          ></PotRow>
+          ></PotCard>
         ))
       ) : (
         <Spinner
@@ -35,4 +33,4 @@ const ListView: React.FC<ListViewProps> = (props) => {
   );
 };
 
-export default ListView;
+export default PotteryCardGrid;
