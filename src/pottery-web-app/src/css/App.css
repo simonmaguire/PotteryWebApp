@@ -73,12 +73,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .pot-card-container {
-  background-color: rgb(100, 100, 100);
   margin: 8px;
-  border-radius: 4px;
 }
 
 .pot-card {
@@ -88,27 +87,40 @@
   position: relative;
 }
 
+.pot-card:hover {
+  cursor: pointer;
+}
+
 .pot-card-info {
   position: absolute;
   bottom: 0;
   z-index: 2;
-  width: 250px;
+  width: fit-content;
+  color: #cccccc;
   display: flex;
   align-items: flex-start;
   justify-content: end;
   flex-direction: column;
+  padding: 10px;
+  padding-right: 32px;
   background-image: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0.75),
+    to top right,
+    rgba(0, 0, 0, 0.85),
     rgba(255, 255, 255, 0.1)
   );
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 0px 12px 4px 0px;
+}
+
+.pot-card-info h5 {
+  font-weight: 600;
+  text-decoration: underline 1px;
+  text-underline-offset: 2px;
 }
 
 .pot-card-pic {
   width: 100%;
   height: 100%;
-  border-radius: 4px;
+  border-radius: 4px 4px 0 0;
 }
 
 .pot-card h5,
@@ -119,16 +131,30 @@ p {
 #pot-card-actions {
   align-items: center;
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
-.pot-action:hover {
-  color: #b63c0c;
+.pot-action-btn {
+  background-color: #502222;
+  width: 45%;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  border-radius: 0px 0px 8px 8px;
+  color: #cccccc;
+  border: #bbbbbb solid;
+  border-width: 0px 1px 1px 1px;
+}
+
+.pot-action-btn:hover {
+  background-color: #cccccc;
+  color: #502222;
+  border-color: #502222;
+  cursor: pointer;
 }
 
 #loading-spinner {

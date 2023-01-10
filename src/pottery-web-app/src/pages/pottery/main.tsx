@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import ListView from "./ListView";
 import PotteryCardGrid from "./PotteryCardGrid";
 
 import Options from "./options";
